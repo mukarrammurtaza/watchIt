@@ -1,13 +1,17 @@
 package com.sdaproject.watchIt.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
-
+@Service
 public class UserService implements UserServiceInterface {
-   @Autowired
+
     UserServiceInterface usi;
+//    @Autowired
+//    UserRepository userRepo; //TODO: use??; usi or userRepo
+
     @Override
     public User getDetails(String id) {
         return usi.getDetails(id);
