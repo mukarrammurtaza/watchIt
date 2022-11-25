@@ -8,21 +8,25 @@ import java.util.List;
 
 @Service
 public class PostService {
-    @Autowired private PostRepository postRepo;
+    @Autowired
+    private PostRepository postRepo;
 
-    public boolean validatePost(String id){
-        return false;
+    public boolean deletePost(String id) {
+    return false;
     }
+        public boolean validatePost (String id){
+            return false;
+        }
 
-    public List<Post> getReqApproval(){
-        return null;
-    }
+        public List<Post> getReqApproval () {
+            return null;
+        }
 
-    public boolean approvePost(String id){
-        return true;
-    }
+        public boolean approvePost (String id){
+            return true;
+        }
 
-    public List<Post> search(String category, String location, Date date){
-        return null;
+        public List<Post> search (String category, String location, Date date){
+            return null;
+        }
     }
-}
