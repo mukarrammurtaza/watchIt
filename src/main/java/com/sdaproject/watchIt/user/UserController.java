@@ -28,18 +28,6 @@ public class UserController {
         return userservices.getDetails(id);
     }
 
-    @PutMapping("/block")
-    public String blockUser(@RequestBody Map<String, Object> input) {
-        userservices.blockUser(Integer.valueOf(((String) input.get("id"))));
-        return "User successfully blocked";
-    }
-
-    @PutMapping("/unblock")
-    public String unBlockUser(@RequestBody Map<String, Object> input) {
-        userservices.unBlockUser(Integer.valueOf(((String) input.get("id"))));
-        return "User successfully unBlocked";
-    }
-
     @PostMapping()
     public ResponseEntity<User> registerUser(@RequestBody User inputUser) {
         return new ResponseEntity<User>(userservices.addUser(inputUser), HttpStatus.ACCEPTED);
