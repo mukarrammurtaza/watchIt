@@ -25,18 +25,4 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public void blockUser(int id) {
-        Optional<User> tempUser = userRepo.findById(id);
-        tempUser.ifPresent(x -> {
-            x.setBlocked(true);
-            userRepo.save(x);
-        });
-    }
-    public void unBlockUser(int id) {
-        Optional<User> tempUser = userRepo.findById(id);
-        tempUser.ifPresent(x -> {
-            x.setBlocked(false);
-            userRepo.save(x);
-        });
-    }
 }
