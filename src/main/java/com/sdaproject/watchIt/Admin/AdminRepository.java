@@ -1,4 +1,8 @@
 package com.sdaproject.watchIt.Admin;
 
-public class AdminRepository {
+import com.sdaproject.watchIt.user.UserRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AdminRepository extends UserRepository {
 }

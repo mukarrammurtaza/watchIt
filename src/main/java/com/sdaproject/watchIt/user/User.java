@@ -14,6 +14,11 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name = "user_type",
+        discriminatorType = DiscriminatorType.STRING
+)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

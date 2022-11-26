@@ -12,12 +12,13 @@ import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
-@Table(name = "admin")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DiscriminatorValue(value = "admin")
 public class Admin extends User {
-    @Column(nullable = false)
+
+    @Column
     private boolean admin;
 
 }
