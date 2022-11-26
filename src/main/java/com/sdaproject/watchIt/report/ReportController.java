@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,10 @@ public class ReportController {
 //    public String showReportPage() {
 //        return "Report";
 //    }
-
+    public boolean addReport(String text, String location, File media)
+    {
+        return reportService.addReport(text,location,media);
+    }
     public Iterable<Report> getNewReports(){
         return reportService.getNewReports();
     }
