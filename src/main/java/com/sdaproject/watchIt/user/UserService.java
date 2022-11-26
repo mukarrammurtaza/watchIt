@@ -3,49 +3,38 @@ package com.sdaproject.watchIt.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.List;
+import java.util.Optional;
+
 @Service
-public class UserService implements UserServiceInterface {
+public class UserService {
+    @Autowired private UserRepository userRepo;
 
-    UserServiceInterface usi;
-//    @Autowired
-//    UserRepository userRepo; //TODO: use??; usi or userRepo
-
-    @Override
-    public User getDetails(String id) {
-        return usi.getDetails(id);
-
+    public User addUser(User newUser) {
+        newUser.setBlocked(false);
+        User createdUser = userRepo.save(newUser);
+        return createdUser;
+    }
+    public User getDetails(int id) {
+       Optional<User> temp = userRepo.findById(id);
+       return temp.stream().findFirst().orElse(null);
+    }
+    public Iterable<User> getAllUsers() {
+        return userRepo.findAll();
     }
 
-    @Override
-    public void setEmail(String s) {
-        usi.setEmail(s);
+    public void blockUser(int id) {
+        Optional<User> tempUser = userRepo.findById(id);
+        tempUser.ifPresent(x -> {
+            x.setBlocked(true);
+            userRepo.save(x);
+        });
     }
-
-    @Override
-    public void setDOB(String dob) {
-        usi.setDOB(dob);
-    }
-
-    @Override
-    public boolean addPost(String s, File f, String s2, String s3) {
-        return false;
-    }
-
-    @Override
-    public boolean addReport(String s, File f, String s2, String s3) {
-        return false;
-    }
-
-    @Override
-    public boolean checkLogin(int i, String s) {
-        return false;
-    }
-
-
-    @Override
-    public boolean blockUser(int id) {
-        return false;
+    public void unBlockUser(int id) {
+        Optional<User> tempUser = userRepo.findById(id);
+        tempUser.ifPresent(x -> {
+            x.setBlocked(false);
+            userRepo.save(x);
+        });
     }
 }

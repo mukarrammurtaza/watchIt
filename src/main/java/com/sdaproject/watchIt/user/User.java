@@ -2,9 +2,11 @@ package com.sdaproject.watchIt.user;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.sql.Date;
 
 @Entity
@@ -27,10 +29,12 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private Date DOB;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dob;
 
+    @Column
     private Boolean blocked;
 
     @Column(nullable = false, length = 15)
-    private String CNIC;
+    private String cnic;
 }
