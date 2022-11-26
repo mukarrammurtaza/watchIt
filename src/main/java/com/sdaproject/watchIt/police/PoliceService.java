@@ -13,7 +13,7 @@ public class PoliceService implements PoliceInterface{
     private ReportService reportservices;
     @Override
     public Report reviewReport(int id) {
-        reportservices.processReport("1");
+        reportservices.processReport(1);
         return null;
     }
 }
