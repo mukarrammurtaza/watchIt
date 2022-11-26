@@ -1,6 +1,7 @@
 package com.sdaproject.watchIt.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired private UserRepository userRepo;
+    @Autowired
+    private UserRepository userRepo;
 
     public User addUser(User newUser) {
         newUser.setBlocked(false);

@@ -2,6 +2,7 @@ package com.sdaproject.watchIt.user;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonNumberFormatVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired UserService userservices;
+    @Autowired
+    private UserService userservices;
 
     @GetMapping
     public Iterable<User> showUsers() {
