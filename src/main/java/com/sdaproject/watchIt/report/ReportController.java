@@ -17,8 +17,10 @@ public class ReportController {
 //    public String showReportPage() {
 //        return "Report";
 //    }
+    @GetMapping("/addreport")
     public boolean addReport(String text, String location, File media)
     {
+        System.out.println("reportAdded");// to test functionality
         return reportService.addReport(text,location,media);
     }
     public Iterable<Report> getNewReports(){

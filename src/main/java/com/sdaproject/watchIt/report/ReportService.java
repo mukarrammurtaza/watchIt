@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ReportService {
     @Autowired private ReportRepository reportRepo;
 
-    @GetMapping("/report")
+
     public boolean addReport(String text, String location, File media){
         //TODO: check if a report with exisiting id doesnt already exist
        // if(reportRepo.findById()) is true return false
