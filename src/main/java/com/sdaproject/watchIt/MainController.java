@@ -18,5 +18,9 @@ public class MainController {
     public String showReporPage() {
         return "Report";
     }
+    @GetMapping("/feed")
+    public String showFeedPage() {
+        return "Feed";
+    }
 
 }
