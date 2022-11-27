@@ -5,11 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("")
+    @GetMapping()
     public String showHomePage() {
         return "home";
     }
-
+    @GetMapping("/home")
+    public String navigateToHomePage() {
+        return "home";
+    }
     @GetMapping("/login")
     public String showLoginPage() {
         return "Login";
@@ -21,6 +24,10 @@ public class MainController {
     @GetMapping("/feed")
     public String showFeedPage() {
         return "Feed";
+    }
+    @GetMapping("/account")
+    public String showAccountPage() {
+        return "Account";
     }
 
 }
