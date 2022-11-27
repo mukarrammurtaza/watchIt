@@ -29,5 +29,9 @@ public class MainController {
     public String showAccountPage() {
         return "Account";
     }
+    @GetMapping("/hotspot")
+    public String showHotSpotPage() {
+        return "hotspot";
+    }
 
 }
