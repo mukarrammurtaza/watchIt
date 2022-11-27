@@ -61,8 +61,9 @@ public class PostService {
             String postCat=currentPosts.get(i).getCategory().toLowerCase();
             String postLoc=currentPosts.get(i).getLocation().toLowerCase();
             Date postDate=currentPosts.get(i).getDate();
-            if (postTxt.indexOf(keyword.toLowerCase()) != -1 && postCat.indexOf(category.toLowerCase()) != -1 && postLoc.indexOf(location.toLowerCase()) != -1 && postDate == date) // all 4: key, cat, loc, date  --- best result
-            {
+            if (postTxt.indexOf(keyword.toLowerCase()) != -1 && postCat.indexOf(category.toLowerCase()) != -1 && postLoc.indexOf(location.toLowerCase()) != -1 && postDate == date)
+            {                                                               // all 4: key, cat, loc, date  --- best result
+
                 searchResult.add(currentPosts.get(i));
                 resultPriority[j]=1;
                 j++;
@@ -130,7 +131,7 @@ public class PostService {
             else if (postTxt.indexOf(keyword.toLowerCase()) != -1 || postCat.indexOf(category.toLowerCase()) != -1 || postLoc.indexOf(location.toLowerCase()) != -1 || postDate == date)
             {                                                               // any one
                 searchResult.add(currentPosts.get(i));
-                resultPriority[j]=3;
+                resultPriority[j]=4;
                 j++;
             }
         }
