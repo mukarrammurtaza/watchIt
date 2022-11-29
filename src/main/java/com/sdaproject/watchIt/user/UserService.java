@@ -1,10 +1,8 @@
 package com.sdaproject.watchIt.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +17,10 @@ public class UserService {
     }
     public User getDetails(int id) {
        Optional<User> temp = userRepo.findById(id);
-       return temp.stream().findFirst().orElse(null);
+       if (temp.isPresent()) {
+           return temp.get();
+       }
+       return null;
     }
     public Iterable<User> getAllUsers() {
         return userRepo.findAll();

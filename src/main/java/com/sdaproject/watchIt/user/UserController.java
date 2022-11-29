@@ -1,18 +1,15 @@
 package com.sdaproject.watchIt.user;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonNumberFormatVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
 
-
-@RestController
+//@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -28,8 +25,15 @@ public class UserController {
         return userservices.getDetails(id);
     }
 
+    @GetMapping("/new")
+    public String showNewForm(Model model){
+        model.addAttribute("user",new User());
+        return "signup";
+    }
+
     @PostMapping()
     public ResponseEntity<User> registerUser(@RequestBody User inputUser) {
+        System.out.println(inputUser);
         return new ResponseEntity<User>(userservices.addUser(inputUser), HttpStatus.ACCEPTED);
     }
 }
