@@ -5,20 +5,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping()
+   /* @GetMapping()
     public String showHomePage() {
         return "home";
     }
     @GetMapping("/home")
     public String navigateToHomePage() {
         return "home";
-    }
-    @GetMapping("/login")
+    }*/
+    @GetMapping()
     public String showLoginPage() {
         return "Login";
     }
+    @GetMapping("/login")
+    public String navigateToLoginPage() {
+        return "Login";
+    }
     @GetMapping("/report")
-    public String showReporPage() {
+    public String showReportPage() {
         return "Report";
     }
     @GetMapping("/feed")
