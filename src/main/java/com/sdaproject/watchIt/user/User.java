@@ -16,8 +16,8 @@ import java.sql.Date;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-        name = "user_type",
-        discriminatorType = DiscriminatorType.STRING
+    name = "user_type",
+    discriminatorType = DiscriminatorType.STRING
 )
 public class User {
     @Id

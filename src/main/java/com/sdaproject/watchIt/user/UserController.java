@@ -23,9 +23,9 @@ public class UserController {
         return userservices.getAllUsers();
     }
 
-    @GetMapping("/details")
-    public User showDetails(@RequestParam("id") int id) {
-        return userservices.getDetails(id);
+    @GetMapping("/{userId}")
+    public User showDetails(@PathVariable int userId) {
+        return userservices.getDetails(userId);
     }
 
     @PostMapping()

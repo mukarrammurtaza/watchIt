@@ -14,15 +14,14 @@ public class AdminController {
     public Admin addAdmin(@RequestBody Admin inputAdmin) {
         return adminServices.addAdmin(inputAdmin);
     }
-    @PutMapping("/block")
-    public String blockUser(@RequestBody Map<String, Object> input) {
-        adminServices.blockUser(Integer.valueOf(((String) input.get("id"))));
+    @PutMapping("/block/{userId}")
+    public String blockUser(@PathVariable int userId) {
+        adminServices.blockUser(userId);
         return "User successfully blocked";
     }
-
-    @PutMapping("/unblock")
-    public String unBlockUser(@RequestBody Map<String, Object> input) {
-        adminServices.unBlockUser(Integer.valueOf(((String) input.get("id"))));
+    @PutMapping("/unblock/{userId}")
+    public String unBlockUser(@PathVariable int userId) {
+        adminServices.unBlockUser(userId);
         return "User successfully unBlocked";
     }
 }

@@ -1,6 +1,5 @@
 package com.sdaproject.watchIt.Admin;
 
-import com.sdaproject.watchIt.police.Police;
 import com.sdaproject.watchIt.user.User;
 import com.sdaproject.watchIt.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
