@@ -44,7 +44,7 @@
       <div id="ui">
         <h1 class="text-center">Create Your Account</h1>
         <br>
-        <form th:action="@{/user}" method="post" th:object="${user}">
+        <form th:action="@{/user/save}" method="post" th:object="${user}">
           <div class="row text-center">
             <div class="col-lg-6">
               <label>Name</label>
@@ -67,12 +67,12 @@
 
             <div class="col-lg-6 text-center">
               <label>Password</label>
-              <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter New Password" required minlength="8" maxlength="25">
+              <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter New Password" required minlength="3" maxlength="25">
             </div>
 
             <div class="col-lg-6 text-center">
               <label>Re-type Password</label>
-              <input type="password" name="confirm_password" class="form-control" placeholder="Re-type the Password" required minlength="5" maxlength="25">
+              <input type="password" name="confirm_password" class="form-control" placeholder="Re-type the Password" required minlength="3" maxlength="25">
             </div>
 
           </div>
