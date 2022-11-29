@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+
 //@RestController
 @Controller
 @RequestMapping("/user")
@@ -35,5 +36,11 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User inputUser) {
         System.out.println(inputUser);
         return new ResponseEntity<User>(userservices.addUser(inputUser), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/save")
+    public String saveUser(User user) {
+        userservices.addUser(user);
+        return "redirect:/";
     }
 }
