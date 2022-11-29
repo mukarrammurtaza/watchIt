@@ -3,7 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import java.sql.Date;
 import java.util.List;
 
@@ -11,7 +12,19 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostController {
     @Autowired PostService postservices;
-    @GetMapping("/new")
+
+    @GetMapping("/savepost")
+    public String savePost(Post post){
+        postservices.save(post);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/newpost")
+    public String showPostForm(Model model){
+        model.addAttribute("post",new Post());
+        return "Post_Form";
+    }
+    @GetMapping("/getposts")
     public List<Post> getPosts() {
         return postservices.getPosts();
     }

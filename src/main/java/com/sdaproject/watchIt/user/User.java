@@ -35,11 +35,11 @@ public class User {
 
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date dob;
+    private Date DOB;
 
     @Column
     private Boolean blocked;
 
     @Column(nullable = false, length = 15)
-    private String cnic;
+    private String CNIC;
 }

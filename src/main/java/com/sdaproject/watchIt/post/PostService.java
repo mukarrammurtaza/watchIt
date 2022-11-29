@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class PostService {
             return true;
         }
 
+    public void save(Post post) {
+        post.setApproved(false);
+        post.setUserId(post.getUserId());
+        post.setCategory(post.getCategory());
+        LocalDate D = LocalDate.now();
+        post.setDate(java.sql.Date.valueOf(D));
+        postRepo.save(post);
+
+    }
     public List<Post> getPosts() {
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
