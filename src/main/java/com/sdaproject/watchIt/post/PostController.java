@@ -1,18 +1,22 @@
 package com.sdaproject.watchIt.post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.swing.text.html.HTML;
 import java.sql.Date;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/post")
 public class PostController {
     @Autowired PostService postservices;
-
+    public boolean showSearchDiv=false;
+    public boolean showsearchresult=false;
     @GetMapping("/savepost")
     public String savePost(Post post){
         postservices.save(post);
@@ -24,9 +28,17 @@ public class PostController {
         model.addAttribute("post",new Post());
         return "Post_Form";
     }
-    @GetMapping("/getposts")
+    @GetMapping("/getallposts")
     public List<Post> getPosts() {
-        return postservices.getPosts();
+        return postservices.getAllPosts();
+    }
+    @GetMapping("/getapprovedposts")
+    public List<Post> getApprovedPosts() {
+        return postservices.getApprovedPosts();
+    }
+    @GetMapping("/getunapprovedposts")
+    public List<Post> getUnApprovedPosts() {
+        return postservices.getUnApprovedPosts();
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()
@@ -38,5 +50,28 @@ public class PostController {
     public List<Post> advancedSearch()
     {
         return postservices.advancedSearch("8 MEN","fook","Fast", Date.valueOf("2022-11-28"));
+    }
+    @GetMapping("/searchwrapper")
+    public String searchWrapper(Model model)
+    {
+        showsearchresult=!showsearchresult;
+        List<Post>searchResult;
+        if(showSearchDiv)
+            searchResult = advancedSearch();
+        else
+            searchResult = simpleSearch();
+        boolean searchempty= simpleSearch().isEmpty();
+        model.addAttribute("showsearchresult",showsearchresult);
+        model.addAttribute("searchempty", searchempty);
+        model.addAttribute("searchresult", searchResult);
+
+        return "searchpost";
+    }
+    @GetMapping("/showsearchdiv")
+    public String showsearchdiv(Model model)
+    {
+        showSearchDiv= !showSearchDiv;
+        model.addAttribute("showSearchDiv",showSearchDiv);
+        return "searchpost";
     }
 }

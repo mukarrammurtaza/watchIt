@@ -1,8 +1,11 @@
 package com.sdaproject.watchIt.report;
 
+import com.sdaproject.watchIt.post.Post;
+import com.sdaproject.watchIt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,26 +16,32 @@ import java.util.Optional;
 @RequestMapping("/report")
 public class ReportController {
     @Autowired ReportService reportService;
-//    @GetMapping("")
-//    public String showReportPage() {
-//        return "Report";
-//    }
-//    @GetMapping("/addreport")
-//    public boolean addReport(String text, String location, File media)
-//    {
-//        System.out.println("reportAdded");// to test functionality
-//        return reportService.addReport(text,location,media);
-//    }
+    @GetMapping("/new")
+    public String showNewForm(Model model){
+        model.addAttribute("report",new Report());
+        return "report";
+    }
     @PostMapping
 public ResponseEntity<Report> addReport(@RequestBody Report newReport) {
     return new ResponseEntity<Report>(reportService.addReport(newReport), HttpStatus.ACCEPTED);
 }
-    public Iterable<Report> getNewReports(){
-        return reportService.getNewReports();
+    @GetMapping("/getallreports")
+    public Iterable<Report> getAllReports() {
+        return reportService.getAllReports();
     }
-    public Optional<Report> getUserReports(String id){
+    @GetMapping("/getapprovedposts")
+    public Iterable<Report> getProcessedReports() {
+        return reportService.getProcessedReports();
+    }
+    @GetMapping("/getunapprovedposts")
+    public Iterable<Report> getUnProcessedReports() {
+        return reportService.getUnProcessedReports();
+    }
+    @GetMapping("/getuserposts")
+    public Iterable<Report> getUserReports(String id){
         return reportService.getUserReports(id);
     }
+    @GetMapping("/processreport")
     public Optional<Report> processReport(@RequestBody Map<Integer, Object> report){
         return reportService.processReport(Integer.valueOf(((Integer) report.get("id"))));
 

@@ -60,6 +60,9 @@ public class MainController {
         model.addAttribute("newPost", new Post());
         return "Feed";
     }
+
+    @GetMapping("/searchpost")
+    public String showSearchPostPage() {return "searchpost";}
     @GetMapping("/account")
     public String showAccountPage(Model model) {
         model.addAttribute("user_info", userservices.getDetails(1));
