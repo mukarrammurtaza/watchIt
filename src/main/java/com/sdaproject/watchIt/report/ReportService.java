@@ -32,8 +32,6 @@ public Report addReport(Report r){
 
 }
 
-
-
     @GetMapping("/newReports")
     public Iterable<Report> getNewReports(){
         return reportRepo.findAll();

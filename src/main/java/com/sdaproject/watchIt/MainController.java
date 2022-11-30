@@ -29,6 +29,9 @@ public class MainController {
     public String showFeedPage() {
         return "Feed";
     }
+
+    @GetMapping("/searchpost")
+    public String showSearchPostPage() {return "searchpost";}
     @GetMapping("/account")
     public String showAccountPage() {
         return "Account";

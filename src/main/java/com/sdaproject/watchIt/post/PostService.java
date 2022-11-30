@@ -50,11 +50,9 @@ public class PostService {
     public List<Post> simpleSearch(String keyword){
         List<Post> currentPosts=getPosts();
         List<Post> searchResult=new ArrayList<Post>();
-        for (int i=0;i< currentPosts.size();i++)
-        {
-            String postTxt=currentPosts.get(i).getText().toLowerCase();
-            if(postTxt.indexOf(keyword.toLowerCase())!=-1)
-            {
+        for (int i=0;i< currentPosts.size();i++) {
+            String postTxt = currentPosts.get(i).getText().toLowerCase();
+            if (postTxt.indexOf(keyword.toLowerCase()) != -1) {
                 searchResult.add(currentPosts.get(i));
             }
         }
