@@ -44,7 +44,7 @@
       <div id="ui">
         <h1 class="text-center">Create Your Account</h1>
         <br>
-        <form th:action="@{/create}" method="post" th:object="${user}">
+        <form th:action="@{/user/save}" method="post" th:object="${user}">
           <div class="row text-center">
             <div class="col-lg-6">
               <label>Name</label>
@@ -53,7 +53,7 @@
 
             <div class="col-lg-6">
               <label>CNIC</label>
-              <input type="text" name="CNIC" th:field="*{CNIC}" class="form-control" placeholder="Enter your CNIC" required minlength="15" maxlength="15">
+              <input type="text" name="CNIC" th:field="*{CNIC}" class="form-control" placeholder="Enter your CNIC" required minlength="13" maxlength="13">
             </div>
 
           </div>
@@ -92,7 +92,7 @@
           <br>
           <div class="text-center">
             <label>Already have an account?</label>
-            <a th:href="@{/signin}" style="color:white;"><u>Sign In</u></a>
+            <a href="login.html" style="color:white;"><u>Sign In</u></a>
           </div>
         </form>
 

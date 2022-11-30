@@ -75,6 +75,7 @@ public class PostService {
         });
         return temp2;
     }
+<<<<<<< HEAD
 
     public List<Post> getUserPosts(int id) {
         Iterable<Post> temp = postRepo.findAll();
@@ -96,6 +97,8 @@ public class PostService {
         return temp2;
     }
 
+=======
+>>>>>>> parent of c7d5a30 (Big commit pre login)
     public List<Post> simpleSearch(String keyword){
         List<Post> currentPosts=getApprovedPosts();
         List<Post> searchResult=new ArrayList<Post>();

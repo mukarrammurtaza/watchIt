@@ -6,9 +6,13 @@ import com.sdaproject.watchIt.user.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Controller;
 
-//@ComponentScan({ "com.sdaproject.watchIt.MainController","controller","service"})
+
 @SpringBootApplication
+//@ComponentScan({ "com.sdaproject.watchIt.MainController","controller","service"})
+
 public class Application {
 
 	public static void main(String[] args) {

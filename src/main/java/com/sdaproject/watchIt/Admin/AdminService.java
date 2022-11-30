@@ -1,33 +1,34 @@
 package com.sdaproject.watchIt.Admin;
 
 import com.sdaproject.watchIt.user.User;
+import com.sdaproject.watchIt.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
 public class AdminService implements AdminInterface {
-    @Autowired private AdminRepository adminRepo;
+    @Autowired private UserRepository userRepo;
     @Override
     public Admin addAdmin(Admin inputAdminUser) {
         inputAdminUser.setBlocked(false);
         System.out.println(inputAdminUser);
-        Admin createdAdminUser = adminRepo.save(inputAdminUser);
+        Admin createdAdminUser = userRepo.save(inputAdminUser);
         return createdAdminUser;
     }
     @Override
     public void blockUser(int id) {
-        Optional<User> tempUser = adminRepo.findById(Long.valueOf(id));
+        Optional<User> tempUser = userRepo.findById(id);
         tempUser.ifPresent(x -> {
             x.setBlocked(true);
-            adminRepo.save(x);
+            userRepo.save(x);
         });
     }
     public void unBlockUser(int id) {
-        Optional<User> tempUser = adminRepo.findById(Long.valueOf(id));
+        Optional<User> tempUser = userRepo.findById(id);
         tempUser.ifPresent(x -> {
             x.setBlocked(false);
-            adminRepo.save(x);
+            userRepo.save(x);
         });
     }
 }
