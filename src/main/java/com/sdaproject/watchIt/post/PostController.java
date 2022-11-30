@@ -24,9 +24,17 @@ public class PostController {
         model.addAttribute("post",new Post());
         return "Post_Form";
     }
-    @GetMapping("/getposts")
+    @GetMapping("/getallposts")
     public List<Post> getPosts() {
-        return postservices.getPosts();
+        return postservices.getAllPosts();
+    }
+    @GetMapping("/getapprovedposts")
+    public List<Post> getApprovedPosts() {
+        return postservices.getApprovedPosts();
+    }
+    @GetMapping("/getunapprovedposts")
+    public List<Post> getUnApprovedPosts() {
+        return postservices.getUnApprovedPosts();
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()

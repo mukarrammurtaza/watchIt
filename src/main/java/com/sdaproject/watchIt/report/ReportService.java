@@ -1,9 +1,11 @@
 package com.sdaproject.watchIt.report;
 
+import com.sdaproject.watchIt.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,33 +26,63 @@ public class ReportService {
 //
 //    }
 
-public Report addReport(Report r){
-    r.setUserId(007);
-    r.setProcessed(false);
+    public Report addReport(Report r) {
+        r.setUserId(007);
+        r.setProcessed(false);
 
-    return reportRepo.save(r);
+        return reportRepo.save(r);
 
-}
-
-
-
-    @GetMapping("/newReports")
-    public Iterable<Report> getNewReports(){
+    }
+    @GetMapping("/allreports")
+    public Iterable<Report>  getAllReports() {
         return reportRepo.findAll();
     }
-    @GetMapping("/userReports")
-    public Optional<Report> getUserReports(String id){
-        try{
+
+    @GetMapping("/processedreports")
+    public Iterable<Report>  getProcessedReports() {
+
+        Iterable<Report> temp = reportRepo.findAll();
+        List<Report> temp2 = new ArrayList<Report>();
+        temp.forEach(report -> {
+            if(report.isProcessed())//return all Approved Posts
+                temp2.add(report);
+        });
+        return temp2;
+
+
+    }
+    @GetMapping("/unprocessedreports")
+    public Iterable<Report>  getUnProcessedReports() {
+
+        Iterable<Report> temp = reportRepo.findAll();
+        List<Report> temp2 = new ArrayList<Report>();
+        temp.forEach(report -> {
+            if(!report.isProcessed())//return all Approved Posts
+                temp2.add(report);
+        });
+        return temp2;
+    }
+
+    @GetMapping("/userreports")
+    public Iterable<Report> getUserReports(String id){
+        try
+        {
             int number = Integer.parseInt(id);
-           return reportRepo.findById(number);
-        }
+            Iterable<Report> temp =  reportRepo.findAll();
+            List<Report> temp2 = new ArrayList<Report>();
+            temp.forEach(report ->
+            {if(number==report.getReportId())//return all Approved Posts
+                    temp2.add(report);
+                });
+            return temp2;
+         }
         catch (NumberFormatException ex){
             ex.printStackTrace();
         }
 
         return null;
     }
-
+    @GetMapping("/processreport")
     public Optional<Report> processReport(int postId) {
         Optional<Report> report = reportRepo.findById(postId);
         report.ifPresent(x -> {
