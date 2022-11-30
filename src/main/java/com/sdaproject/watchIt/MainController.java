@@ -15,6 +15,7 @@ public class MainController {
     }
     @GetMapping("/login")
     public String showLoginPage() {
+        System.out.println("Login function called");
         return "Login";
     }
     @GetMapping("/report")

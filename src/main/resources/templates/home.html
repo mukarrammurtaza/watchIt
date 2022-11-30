@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <!-- Start -->
 
@@ -34,7 +34,7 @@
   <div class="nav-btns">
 
     <!--        <a th:action="@{/hot-deal-step-1}">Login</a>-->
-    <form th:action="@{/login}" class="form-inline">
+    <form th:action="@{/login}" method="get" class="form-inline">
       <input type="submit" class="btn btn-dark btn-success" value="login"/>
     </form>
 
