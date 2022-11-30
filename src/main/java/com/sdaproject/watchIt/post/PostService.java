@@ -1,5 +1,6 @@
 package com.sdaproject.watchIt.post;
 
+import com.sdaproject.watchIt.report.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -15,17 +17,34 @@ public class PostService {
     private PostRepository postRepo;
 
     public boolean deletePost(String id) {
-    return false;
+        int number=Integer.parseInt(id);
+        Optional<Post> post = postRepo.findById(number);
+        post.ifPresent(x -> {
+            //x.setProcessed(true);
+            postRepo.delete(x);
+
+
+        });
+        return false;
     }
         public boolean validatePost (String id){
+            int number=Integer.parseInt(id);
+
+            Optional<Post> post = postRepo.findById(number);
+            post.ifPresent(x -> {
+                //x.setProcessed(true);
+                x.setApproved(true);
+                postRepo.save(x);
+
+            });
             return false;
-        }
+            }
 
         public List<Post> getReqApproval () {
             return null;
         }
 
-        public boolean approvePost (String id){
+        public boolean approvePost (String id){//same as validatePost
             return true;
         }
 
@@ -38,17 +57,45 @@ public class PostService {
         postRepo.save(post);
 
     }
-    public List<Post> getPosts() {
+    public List<Post> getAllPosts() {
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
         temp.forEach(post -> {
-            if(post.isApproved())
+
+            temp2.add(post);
+        });
+        return temp2;
+    }
+    public List<Post> getApprovedPosts() {
+        Iterable<Post> temp = postRepo.findAll();
+        List<Post> temp2 = new ArrayList<Post>();
+        temp.forEach(post -> {
+            if(post.isApproved())//returnin all Approved Posts
                 temp2.add(post);
         });
         return temp2;
     }
+    public List<Post> getUnApprovedPosts() {
+        Iterable<Post> temp = postRepo.findAll();
+        List<Post> temp2 = new ArrayList<Post>();
+        temp.forEach(post -> {
+            if(!post.isApproved())//returnin all Approved Posts
+                temp2.add(post);
+        });
+        return temp2;
+    }
+    public List<Post> getPendingPosts() {//same as unApproved posts
+        Iterable<Post> temp = postRepo.findAll();
+        List<Post> temp2 = new ArrayList<Post>();
+        temp.forEach(post -> {
+            if(!post.isApproved())//return all UnApproved Posts
+                temp2.add(post);
+        });
+        return temp2;
+    }
+
     public List<Post> simpleSearch(String keyword){
-        List<Post> currentPosts=getPosts();
+        List<Post> currentPosts=getApprovedPosts();
         List<Post> searchResult=new ArrayList<Post>();
         for (int i=0;i< currentPosts.size();i++) {
             String postTxt = currentPosts.get(i).getText().toLowerCase();
@@ -59,7 +106,7 @@ public class PostService {
         return searchResult;
     }
     public List<Post> advancedSearch (String keyword, String category, String location, Date date){
-        List<Post> currentPosts=getPosts();
+        List<Post> currentPosts=getApprovedPosts();
         List<Post> searchResult=new ArrayList<Post>();
         int resultPriority[]=new int[currentPosts.size()];
         int j=0;
