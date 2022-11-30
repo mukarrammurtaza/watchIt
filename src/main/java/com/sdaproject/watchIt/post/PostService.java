@@ -47,6 +47,16 @@ public class PostService {
         });
         return temp2;
     }
+
+    public List<Post> getUserPosts(int id) {
+        Iterable<Post> temp = postRepo.findAll();
+        List<Post> temp2 = new ArrayList<Post>();
+        temp.forEach(post -> {
+            if(post.getUserId() == id)
+                temp2.add(post);
+        });
+        return temp2;
+    }
     public List<Post> simpleSearch(String keyword){
         List<Post> currentPosts=getPosts();
         List<Post> searchResult=new ArrayList<Post>();

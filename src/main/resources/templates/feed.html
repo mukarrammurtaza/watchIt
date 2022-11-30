@@ -17,9 +17,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-white" aria-current="page" th:href="@{home}">Home</a>
-        <a class="nav-link text-white"  th:href="@{account}">Account</a>
-        <a class="nav-link text-white"  th:href="@{report}">Report</a>
+        <a class="nav-link text-white" aria-current="page" th:href="@{/user/feed}">Home</a>
+        <a class="nav-link text-white"  th:href="@{/user/account}">Account</a>
+        <a class="nav-link text-white"  th:href="@{/user/report}">Report</a>
         <a class="nav-link text-white"  th:href="@{hotspot}">Crime Hotspots</a>
 
     </div>
@@ -120,7 +120,7 @@
           <a href="#" class="btn btn-primary" style="border-radius: 20px">Post</a>
                   <input type="button"
                          value="Go Somewhere Else"
-                         onclick="location.href='<%: Url.Action("", "UserController") %>'" />
+                         onclick="location.href='<%: Url.Action('', 'UserController') %>'"/>
             </div>
             </div>
         </div>
