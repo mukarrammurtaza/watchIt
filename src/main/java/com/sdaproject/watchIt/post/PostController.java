@@ -55,7 +55,7 @@ public class PostController {
             searchResult = advancedSearch();
         else
             searchResult = simpleSearch();
-        boolean searchempty= simpleSearch().isEmpty();
+        boolean searchempty= searchResult.isEmpty();
         model.addAttribute("showsearchresult",showsearchresult);
         model.addAttribute("searchempty", searchempty);
         model.addAttribute("searchresult", searchResult);
