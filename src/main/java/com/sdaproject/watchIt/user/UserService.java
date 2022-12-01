@@ -9,7 +9,6 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepo;
-
     public boolean authenticate(User credentials) {
         Optional<User> found =  userRepo.findByEmail(credentials.getEmail());
         if(found.isPresent()){

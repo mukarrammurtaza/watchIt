@@ -34,7 +34,7 @@ public class UserController {
         if (userservices.authenticate(credentials)) {
             System.out.println("Validated User");
             req.getSession().setAttribute("email", credentials.getEmail());
-            if(userRepo.findByEmail(credentials.getEmail()).get().getAdmin()) {
+            if(userRepo.findByEmail(credentials.getEmail()).get().getAdmin() != null) {
                 req.getSession().setAttribute("admin", true);
             }
             return "redirect:/feed";
