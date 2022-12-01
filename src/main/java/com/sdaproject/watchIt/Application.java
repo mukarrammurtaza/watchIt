@@ -16,6 +16,8 @@ public class Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(Application.class, args);
+		UserRepository policeRepo = configurableApplicationContext.getBean(PoliceRepository.class);
+		UserRepository adminRepo = configurableApplicationContext.getBean(AdminRepository.class);
 	}
 
 }

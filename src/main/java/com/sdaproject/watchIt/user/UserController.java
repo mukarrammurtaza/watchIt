@@ -1,11 +1,12 @@
 package com.sdaproject.watchIt.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 //@RestController
@@ -14,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired
     private UserService userservices;
-
-//    @Autowired
-//    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping
     public Iterable<User> showUsers() {

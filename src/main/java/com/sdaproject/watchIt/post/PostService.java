@@ -74,16 +74,15 @@ public class PostService {
         });
         return temp2;
     }
-    public List<Post> getUserPosts(int id) {
+    public List<Post> getUnApprovedPosts() {
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
         temp.forEach(post -> {
-            if(post.getUserId() == id)
+            if(!post.isApproved())//returnin all Approved Posts
                 temp2.add(post);
         });
         return temp2;
     }
-    
     public List<Post> getPendingPosts() {//same as unApproved posts
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();

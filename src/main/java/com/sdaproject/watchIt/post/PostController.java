@@ -1,8 +1,11 @@
 package com.sdaproject.watchIt.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.Date;
 import java.util.List;
@@ -30,7 +33,7 @@ public class PostController {
     }
     @GetMapping("/getunapprovedposts")
     public List<Post> getUnApprovedPosts() {
-        return postservices.getPendingPosts();
+        return postservices.getUnApprovedPosts();
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()

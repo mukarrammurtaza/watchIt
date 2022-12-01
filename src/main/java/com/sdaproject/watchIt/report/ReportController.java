@@ -25,7 +25,6 @@ public class ReportController {
         reportService.addReport(newReport);
         return "redirect:/feed";
     }
-
     @GetMapping("/getallreports")
     public Iterable<Report> getAllReports() {
         return reportService.getAllReports();
@@ -40,7 +39,6 @@ public class ReportController {
     public Iterable<Report> getUnProcessedReports() {
         return reportService.getUnProcessedReports();
     }
-
     @GetMapping("/processreport")
     public Optional<Report> processReport(@RequestBody Map<Integer, Object> report) {
         return reportService.processReport(Integer.valueOf(((Integer) report.get("id"))));

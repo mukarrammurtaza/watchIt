@@ -12,11 +12,6 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name = "comment_type",
-    discriminatorType = DiscriminatorType.STRING
-)
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
