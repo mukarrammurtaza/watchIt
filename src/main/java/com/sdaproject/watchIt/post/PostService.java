@@ -60,11 +60,21 @@ public class PostService {
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
         temp.forEach(post -> {
-
             temp2.add(post);
         });
         return temp2;
     }
+
+    public List<Post> getUserPosts(int id) {
+        Iterable<Post> temp = postRepo.findAll();
+        List<Post> temp2 = new ArrayList<Post>();
+        temp.forEach(post -> {
+            if(post.getUserId() == id)
+                temp2.add(post);
+        });
+        return temp2;
+    }
+
     public List<Post> getApprovedPosts() {
         Iterable<Post> temp = postRepo.findAllByOrderByDateDesc();
         List<Post> temp2 = new ArrayList<Post>();
