@@ -18,9 +18,13 @@ public class MainController {
         System.out.println("Login function called");
         return "Login";
     }
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String navigateToLoginPage() {
         return "Login";
+    }
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";
     }
     @GetMapping("/report")
     public String showReportPage() {

@@ -36,6 +36,7 @@ public class ReportService {
 
     @GetMapping("/newReports")
     public Iterable<Report> getNewReports(){
+        return null;
     }
     @GetMapping("/allreports")
     public Iterable<Report>  getAllReports() {

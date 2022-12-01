@@ -38,7 +38,7 @@ public class PostController {
     }
     @GetMapping("/getunapprovedposts")
     public List<Post> getUnApprovedPosts() {
-        return postservices.getUnApprovedPosts();
+        return postservices.getPendingPosts();
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()
