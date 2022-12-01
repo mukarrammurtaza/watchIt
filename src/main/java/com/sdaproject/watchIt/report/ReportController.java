@@ -21,8 +21,9 @@ public class ReportController {
         model.addAttribute("report",new Report());
         return "report";
     }
+    @GetMapping("/addReport")
     @PostMapping
-public ResponseEntity<Report> addReport(@RequestBody Report newReport) {
+public ResponseEntity<Report> addReport(@RequestParam("id") @RequestBody Report newReport) {
     return new ResponseEntity<Report>(reportService.addReport(newReport), HttpStatus.ACCEPTED);
 }
     @GetMapping("/getallreports")
