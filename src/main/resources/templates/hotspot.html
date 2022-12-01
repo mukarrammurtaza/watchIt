@@ -6,6 +6,26 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg bg-primary ">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">WatchIt</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav me-auto">
+
+                <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
+                <a class="nav-link text-white" th:href="@{report}">Report</a>
+                <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
+                <a class="nav-link text-white" th:href="@{account}">Account</a>
+                <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
+
+            </div>
+            <a class="nav-link text-white me-3" th:href="@{logout}">Logout</a>
+        </div>
+    </div>
+</nav>
 
 <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen display:Block
         src="https://www.google.com/maps/embed/v1/view?zoom=10&center=31.5204%2C74.3587&key=AIzaSyDqAGrJ81AqwYVNxchuXbYOnwfFSaYrrYI"></iframe>
