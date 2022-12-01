@@ -11,14 +11,10 @@ import org.springframework.stereotype.Controller;
 
 
 @SpringBootApplication
-//@ComponentScan({ "com.sdaproject.watchIt.MainController","controller","service"})
-
 public class Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(Application.class, args);
-		UserRepository policeRepo = configurableApplicationContext.getBean(PoliceRepository.class);
-		UserRepository adminRepo = configurableApplicationContext.getBean(AdminRepository.class);
 	}
 
 }

@@ -1,11 +1,8 @@
 package com.sdaproject.watchIt.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.swing.text.html.HTML;
 import java.sql.Date;
@@ -18,7 +15,7 @@ public class PostController {
     public boolean showSearchDiv=false;
     public boolean showsearchresult=false;
     @GetMapping("/savepost")
-    public String savePost(Post post){
+    public String savePost(@RequestParam("id") Post post){
         postservices.save(post);
         return "redirect:/home";
     }
@@ -38,7 +35,7 @@ public class PostController {
     }
     @GetMapping("/getunapprovedposts")
     public List<Post> getUnApprovedPosts() {
-        return postservices.getUnApprovedPosts();
+        return postservices.getPendingPosts();
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()

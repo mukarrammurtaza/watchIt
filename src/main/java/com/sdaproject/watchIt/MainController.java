@@ -1,6 +1,8 @@
 package com.sdaproject.watchIt;
 
+import com.sdaproject.watchIt.user.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
@@ -15,11 +17,17 @@ public class MainController {
     }*/
     @GetMapping()
     public String showLoginPage() {
+        System.out.println("Login function called");
         return "Login";
     }
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String navigateToLoginPage() {
         return "Login";
+    }
+    @GetMapping("/signup")
+    public String showSignupPage(Model model) {
+        model.addAttribute("user", new User());
+        return "signup";
     }
     @GetMapping("/report")
     public String showReportPage() {
