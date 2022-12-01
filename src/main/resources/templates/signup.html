@@ -41,7 +41,7 @@
       <div id="ui">
         <h1 class="text-center">Create Your Account</h1>
         <br>
-        <form method="post" th:action="@{/user/save}" th:object="${user}">
+        <form method="post" th:action="@{/user/save}" th:object="${user}" enctype="multipart/form-data">
           <div class="row text-center">
             <div class="col-lg-6">
               <label>Name</label>
@@ -83,6 +83,11 @@
             <br>
             <input class="form-control" name="dateofbirth" placeholder="Enter Your Date of Birth" required
                    th:field="*{DOB}" type="date">
+          </div>
+          <br>
+          <div>
+            <label>Profile Photo</label>
+            <input type="file" name="file" accept="image/*" class="form-control-file">
           </div>
           <br>
           <input id="newsletter" name="newsletter" type="checkbox" value="check">

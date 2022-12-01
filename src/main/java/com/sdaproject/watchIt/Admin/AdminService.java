@@ -11,10 +11,10 @@ import java.util.Optional;
 public class AdminService implements AdminInterface {
     @Autowired private UserRepository userRepo;
     @Override
-    public Admin addAdmin(Admin inputAdminUser) {
+    public User addAdmin(User inputAdminUser) {
         inputAdminUser.setBlocked(false);
         System.out.println(inputAdminUser);
-        Admin createdAdminUser = userRepo.save(inputAdminUser);
+        User createdAdminUser = userRepo.save(inputAdminUser);
         return createdAdminUser;
     }
     @Override

@@ -1,5 +1,6 @@
 package com.sdaproject.watchIt.Admin;
 
+import com.sdaproject.watchIt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ public class AdminController {
     @Autowired private AdminService adminServices;
 
     @PostMapping
-    public Admin addAdmin(@RequestBody Admin inputAdmin) {
+    public User addAdmin(@RequestBody User inputAdmin) {
         return adminServices.addAdmin(inputAdmin);
     }
     @PutMapping("/block")

@@ -42,4 +42,10 @@ public class User {
 
     @Column(nullable = false, length = 15)
     private String CNIC;
+
+    @Column
+    private Boolean admin;
+
+    @Column
+    private byte[] profile_image;
 }
