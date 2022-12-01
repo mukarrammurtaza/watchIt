@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,13 +50,11 @@ public class PostService {
         }
 
     public void save(Post post) {
-        post.setApproved(false);
-        post.setUserId(post.getUserId());
-        post.setCategory(post.getCategory());
+        post.setApproved(true);
+        post.setCategory("Crime");
         LocalDate D = LocalDate.now();
         post.setDate(java.sql.Date.valueOf(D));
         postRepo.save(post);
-
     }
     public List<Post> getAllPosts() {
         Iterable<Post> temp = postRepo.findAll();
@@ -67,7 +66,7 @@ public class PostService {
         return temp2;
     }
     public List<Post> getApprovedPosts() {
-        Iterable<Post> temp = postRepo.findAll();
+        Iterable<Post> temp = postRepo.findAllByOrderByDateDesc();
         List<Post> temp2 = new ArrayList<Post>();
         temp.forEach(post -> {
             if(post.isApproved())//returnin all Approved Posts

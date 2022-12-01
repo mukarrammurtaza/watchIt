@@ -3,7 +3,7 @@
 
 <head>
   <title>Signup Page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link href="style.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -26,80 +26,84 @@
 		#ui label,h1{
 			color: #fff;
 		}
-	</style>
+
+  </style>
 </head>
 
 <body>
-  <div class="container-fluid bg-primary text-white text-center p-4 mb-3">
-    <h2>WatchIt</h2>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3"></div>
-      <div class="col-lg-6">
-        <div id="ui">
-          <h1 class="text-center">Create Your Account</h1>
+<div class="container-fluid bg-primary text-white text-center p-4 mb-3">
+  <h2>WatchIt</h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <div id="ui">
+        <h1 class="text-center">Create Your Account</h1>
+        <br>
+        <form method="post" th:action="@{/user/save}" th:object="${user}">
+          <div class="row text-center">
+            <div class="col-lg-6">
+              <label>Name</label>
+              <input class="form-control" maxlength="40" minlength="2" name="name" placeholder="Enter your Name"
+                     required th:field="*{name}" type="text">
+            </div>
+            <div class="col-lg-6">
+              <label>CNIC</label>
+              <input class="form-control" maxlength="13" minlength="13" name="CNIC" placeholder="Enter your CNIC"
+                     required th:field="*{CNIC}" type="text">
+            </div>
+
+          </div>
           <br>
-          <form th:action="@{/user/save}" method="post" th:object="${user}">
-            <div class="row text-center">
-              <div class="col-lg-6">
-                <label>Name</label>
-                <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Enter your Name" required minlength="2" maxlength="40">
-              </div>
+          <div class="text-center">
+            <label>Email</label>
+            <input class="form-control" maxlength="40" minlength="8" name="email"
+                   placeholder="Enter your Email Address" required th:field="*{email}" type="email">
+          </div>
+          <br>
+          <div class="row">
 
-              <div class="col-lg-6">
-                <label>CNIC</label>
-                <input type="text" name="CNIC" th:field="*{CNIC}" class="form-control" placeholder="Enter your CNIC" required minlength="13" maxlength="13">
-              </div>
-
+            <div class="col-lg-6 text-center">
+              <label>Password</label>
+              <input class="form-control" maxlength="25" minlength="3" name="password"
+                     placeholder="Enter New Password" required th:field="*{password}" type="password">
             </div>
-            <br>
-            <div class="text-center">
-              <label>Email</label>
-              <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Enter your Email Address" required minlength="8" maxlength="40">
+
+            <div class="col-lg-6 text-center">
+              <label>Re-type Password</label>
+              <input class="form-control" maxlength="25" minlength="3" name="confirm_password"
+                     placeholder="Re-type the Password" required type="password">
             </div>
+
+          </div>
+          <br>
+          <div class="text-center">
+            <label>Date of Birth</label>
             <br>
-            <div class="row">
-
-              <div class="col-lg-6 text-center">
-                <label>Password</label>
-                <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter New Password" required minlength="3" maxlength="25">
-              </div>
-
-              <div class="col-lg-6 text-center">
-                <label>Re-type Password</label>
-                <input type="password" name="confirm_password" class="form-control" placeholder="Re-type the Password" required minlength="3" maxlength="25">
-              </div>
-
-            </div>
-            <br>
-            <div class="text-center">
-              <label>Date of Birth</label>
-              <br>
-              <input type="date" name="dateofbirth" th:field="*{DOB}" class="form-control" placeholder="Enter Your Date of Birth" required>
-
-
-            </div>
-            <br>
-            <input type="checkbox" id="newsletter" name="newsletter" value="check">
-            <label for="newsletter">I accept the terms and conditions</label>
-            <br>
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">
-            <br>
-            <div class="text-center">
-              <label>Already have an account?</label>
-              <a href="login.html" style="color:white;"><u>Sign In</u></a>
-            </div>
-          </form>
-
-        </div>
+            <input class="form-control" name="dateofbirth" placeholder="Enter Your Date of Birth" required
+                   th:field="*{DOB}" type="date">
+          </div>
+          <br>
+          <input id="newsletter" name="newsletter" type="checkbox" value="check">
+          <label for="newsletter">I accept the terms and conditions</label>
+          <br>
+          <input class="btn btn-primary btn-block" name="submit" type="submit" value="Submit">
+          <br>
+          <div class="text-center">
+            <label>Already have an account?</label>
+            <a th:href="@{login}" style="color:white;"><u>Sign In</u></a>
+          </div>
+        </form>
 
       </div>
+
     </div>
   </div>
 </div>
+</div>
 <div
-        class=" text-center fixed-bottom  bg-primary">
+    class=" text-center fixed-bottom  bg-primary">
   <!-- Copyright -->
   <div class="text-white text-center my-2">
     Copyright © 2022. All rights reserved.

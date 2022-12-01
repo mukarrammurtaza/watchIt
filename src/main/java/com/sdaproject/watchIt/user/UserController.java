@@ -5,6 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 //@RestController
 @Controller
 @RequestMapping("/user")
@@ -20,6 +23,17 @@ public class UserController {
         return userservices.getAllUsers();
     }
 
+    @PostMapping("/authenticate")
+    public String authenticate(User credentials, HttpServletRequest req) {
+        System.out.println(credentials);
+        if (userservices.authenticate(credentials)) {
+            System.out.println("Validated User");
+            req.getSession().setAttribute("email", credentials.getEmail());
+            return "redirect:/feed";
+        }
+            else return "redirect:/login";
+    }
+
     @GetMapping("/{userId}")
     public User showDetails(@PathVariable int userId) {
         return userservices.getDetails(userId);
@@ -31,7 +45,7 @@ public class UserController {
             user.setBlocked(false);
 //            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userservices.addUser(user);
-            return "redirect:/feed";
+            return "redirect:/login";
         } catch (Exception err) {
             return "redirect:/signup";
         }

@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
   <link href="../static/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script crossorigin="anonymous"
+          integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <title>WatchIt</title>
 </head>
 <body>
@@ -12,23 +15,23 @@
 <nav class="navbar navbar-expand-lg bg-primary ">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">WatchIt</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-white active"  th:href="@{account}">Account</a>
-        <a class="nav-link text-white"  th:href="@{feed}">Feed</a>
-        <a class="nav-link text-white"  th:href="@{searchpost}">Search</a>
-        <a class="nav-link text-white" aria-current="page"  th:href="@{home}">Home</a>
+        <a class="nav-link text-white active" th:href="@{account}">Account</a>
+        <a class="nav-link text-white" th:href="@{feed}">Feed</a>
+        <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
+        <a aria-current="page" class="nav-link text-white" th:href="@{home}">Home</a>
         <a class="nav-link text-white" th:href="@{report}">Report</a>
         <a class="nav-link text-white" href="#"></a>
       </div>
     </div>
   </div>
 </nav>
-
-
 <section style="background-color: #eee;">
   <div class="container py-5">
     <div class="row">
@@ -36,105 +39,83 @@
         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Account</li>
+            <li aria-current="page" class="breadcrumb-item active">Account</li>
           </ol>
         </nav>
       </div>
     </div>
-
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="../static/imgs/user.png" alt="avatar"
-                 class="rounded-circle img-fluid" style="width: 150px;" th:src="@{imgs/help.png}">
-            <h5 class="my-3">Mohammad Ali</h5>
-
-            <p class="text-muted mb-4">Lahore, Punjab</p>
-
+            <img alt="avatar" class="rounded-circle img-fluid"
+                 src="../static/imgs/user.png" style="width: 150px;" th:src="@{imgs/help.png}">
+            <h5 class="my-3" th:text="${userDetails.name}">Mohammad Ali</h5>
           </div>
-
-
         </div>
-
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body ">
-
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">UserID</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">4571</p>
+                <p class="text-muted mb-0" th:text="${userDetails.id}">4571</p>
               </div>
             </div>
             <hr>
-
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Username</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">Mohammad Ali</p>
+                <p class="text-muted mb-0" th:text="${userDetails.email}">Mohammad Ali</p>
               </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Password</p>
+                <p class="mb-0">DOB</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">ab**yz</p>
+                <p class="text-muted mb-0" th:text="${userDetails.DOB}">(097) 234-5678</p>
               </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Phone</p>
+                <p class="mb-0">CNIC</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">(097) 234-5678</p>
-              </div>
-            </div>
-            <hr>
-
-
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Address</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">Lahore</p>
+                <p class="text-muted mb-0" th:text="${userDetails.CNIC}">Lahore</p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
           <div class="d-flex justify-content-center mb-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button class="btn btn-primary" data-bs-target="#exampleModal" data-bs-toggle="modal" type="button">
               Saved Comments
             </button>
           </div>
-       </div>
+        </div>
       </div>
     </div>
-
-
     <!--saved comments modal-->
-    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static"
+         data-bs-keyboard="false"
+         id="exampleModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">All Saved Comments</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
           </div>
           <div class="modal-body" style="background-color: #f0f2f5;">
             <div class="row d-flex justify-content-center">
@@ -144,79 +125,72 @@
                     <div class="card mb-4">
                       <div class="card-body">
                         <p>Type your note, and hit enter to add it</p>
-
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img src="../static/imgs/user.png" alt="avatar" width="25"
-                                 height="25" />
-                            <p class="small mb-0 ms-2">Martha</p><p class="small mb-0 ms-2 text-muted">14-08-22</p>
+                            <img alt="avatar" height="25" src="../static/imgs/user.png"
+                                 width="25"/>
+                            <p class="small mb-0 ms-2">Martha</p>
+                            <p class="small mb-0 ms-2 text-muted">14-08-22</p>
                           </div>
-
                           <div class="d-flex flex-row align-items-center">
-                            <button type="button" class="btn btn-primary">
+                            <button class="btn btn-primary" type="button">
                               Unsave
                             </button>
                           </div>
                         </div>
                       </div>
                     </div>
-
                     <div class="card mb-4">
                       <div class="card-body">
                         <p>Type your note, and hit enter to add it</p>
-
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img src="../static/imgs/user.png" alt="avatar" width="25"
-                                 height="25" />
-                            <p class="small mb-0 ms-2">Johny</p><p class="small mb-0 ms-2 text-muted">14-08-22</p>
+                            <img alt="avatar" height="25" src="../static/imgs/user.png"
+                                 width="25"/>
+                            <p class="small mb-0 ms-2">Johny</p>
+                            <p class="small mb-0 ms-2 text-muted">14-08-22</p>
                           </div>
                           <div class="d-flex flex-row align-items-center">
-                            <button type="button" class="btn btn-primary">
+                            <button class="btn btn-primary" type="button">
                               Unsave
                             </button>
                           </div>
-
                         </div>
                       </div>
                     </div>
-
                     <div class="card mb-4">
                       <div class="card-body">
                         <p>Type your note, and hit enter to add it</p>
-
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img src="../static/imgs/user.png" alt="avatar" width="25"
-                                 height="25" />
-                            <p class="small mb-0 ms-2">Mary Kate</p><p class="small mb-0 ms-2 text-muted">14-08-22</p>
+                            <img alt="avatar" height="25" src="../static/imgs/user.png"
+                                 width="25"/>
+                            <p class="small mb-0 ms-2">Mary Kate</p>
+                            <p class="small mb-0 ms-2 text-muted">14-08-22</p>
                           </div>
                           <div class="d-flex flex-row align-items-center">
-                            <button type="button" class="btn btn-primary">
+                            <button class="btn btn-primary" type="button">
                               Unsave
                             </button>
                           </div>
-
                         </div>
                       </div>
                     </div>
-
                     <div class="card">
                       <div class="card-body">
                         <p>Type your note, and hit enter to add it</p>
-
                         <div class="d-flex justify-content-between">
                           <div class="d-flex flex-row align-items-center">
-                            <img src="../static/imgs/user.png" alt="avatar" width="25"
-                                 height="25" th:src="@{imgs/user.png}"/>
-                            <p class="small mb-0 ms-2">Johny</p>  <p class="small mb-0 ms-2 text-muted">14-08-22</p>
+                            <img alt="avatar" height="25" src="../static/imgs/user.png"
+                                 th:src="@{imgs/user.png}" width="25"/>
+                            <p class="small mb-0 ms-2">Johny</p>
+                            <p class="small mb-0 ms-2 text-muted">14-08-22</p>
                           </div>
                           <div class="d-flex flex-row align-items-center">
-                            <button type="button" class="btn btn-primary">
+                            <button class="btn btn-primary" type="button">
                               Unsave
                             </button>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -226,65 +200,61 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 </section>
-
-
-
 <h3 class="text-center text-muted my-2">Posts</h3>
 <hr>
 <div class="container my-2">
   <div class="row justify-content-center">
     <div class="col-8">
-
-      <div class="card" >
-        <div class="row justify-content-center">
-          <img src="http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRiULU6xp8Ls7qSNmipLUuaC9BMdy_8j_vvz6KfXTpoaRusojsRb0x2hBNdmeZrCwPzuNflBFvgz1a2yrk" style="width: 20rem" class="card-img-top" alt="...">
+      <div class="card container mb-5 p-2" th:each="post: ${userPosts}" style="marginBottom: 1rem;">
+        <div class="row mt-2" style="display: flex;">
+          <p style="flex: 1;" th:text="${post.date}">Date</p>
+          <p style="flex: 1; text-align: right;" th:text="${post.location}">Location</p>
         </div>
-        <hr>
-        <div class="card-body">
-
-          <div class="container">
-            <div class="row">
-              <p class="card-text">Cristiano Ronaldo dos Santos Aveiro GOIH ComM (Portuguese pronunciation: [kɾiʃˈtjɐnu ʁɔˈnaɫdu]; born 5 February 1985) is a Portuguese professional footballer who plays as a forward and captains the Portugal national team. He is currently a free agent. Widely regarded as one of the greatest players of all time, Ronaldo has won five Ballon d'Or awards[note 3] and four European Golden Shoes, the most by a European player. He has won 32 trophies in his career, including seven league titles, five UEFA Champions Leagues, and the UEFA European Championship. Ronaldo holds the records for most appearances (183), goals (140), and assists (42) in the Champions League, goals in the European Championship (14), international goals (118), and international appearances by a European (192). He is one of the few players to have made over 1,100 professional career appearances, and has scored over 800 official senior career goals for club and country. He is the first player to score in five World Cup tournaments.</p>
-            </div>
-
-            <hr>
-            <div class="row ">
-              <div class="col-3 ms-auto">
-                <p >Lahore | 20-12-2021</p>
-
-              </div>
-
-            </div>
-            <hr>
-
-            <div class="row">
-              <div class="col-8">
-                <input type="text" id="form4Exampl41" class="form-control" placeholder="comment.." style="border-radius: 20px"/>
-              </div>
-              <div class="col-2 ms-auto">
-                <a href="#" class="btn btn-primary" style="border-radius: 20px">Post</a>
-              </div>
-            </div>
+        <div class="row justify-content-center mt-2" th:text="${post.category}">Category</div>
+        <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
+        <div class="row">
+          <div class="col-8">
+            <input class="form-control" id="form4Exampl41" placeholder="comment.."
+                   style="border-radius: 20px"
+                   type="text"/>
+          </div>
+          <div class="col-2 ms-auto">
+            <a class="btn btn-primary" href="#" style="border-radius: 20px">Post</a>
+            <input onclick="location.href='<%: Url.Action('', 'UserController') %>'"
+                   type="button"
+                   value="Go Somewhere Else"/>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
+<hr>
+<h3 class="text-center text-muted my-2">Reports</h3>
+<div class="container my-2">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="card container mb-5 p-2" th:each="report: ${userReports}" style="marginBottom: 1rem;">
+        <div class="row mt-2" style="display: flex;">
+          <p style="flex: 1;" th:text="${report.reportDate}">Date</p>
+          <p style="flex: 1; text-align: center;" th:text="${report.location}">Location</p>
+          <p style="flex: 1; text-align: right;" th:text="${report.processed}">Location</p>
+        </div>
+        <div class="row justify-content-center mt-2 mb-2" th:text="${report.text}">Rona dhona</div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--footer-->
 <div
-        class=" text-center bg-primary">
+    class=" text-center bg-primary">
   <!-- Copyright -->
   <div class="text-white text-center my-2">
     Copyright © 2022. All rights reserved.

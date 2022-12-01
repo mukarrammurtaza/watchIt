@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
   <link href="../static/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script crossorigin="anonymous"
+          integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <title>Landing Page</title>
 </head>
 <body>
@@ -12,127 +15,113 @@
 <nav class="navbar navbar-expand-lg bg-primary ">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">WatchIt</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-white"  aria-current="page" th:href="@{feed}">Feed</a>
-        <a class="nav-link text-white"  th:href="@{report}">Report</a>
-        <a class="nav-link text-white"  th:href="@{searchpost}">Search</a>
-        <a class="nav-link text-white" aria-current="page" th:href="@{home}">Home</a>
-        <a class="nav-link text-white"  th:href="@{account}">Account</a>
-        <a class="nav-link text-white"  th:href="@{hotspot}">Crime Hotspots</a>
+        <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
+        <a class="nav-link text-white" th:href="@{report}">Report</a>
+        <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
+        <a aria-current="page" class="nav-link text-white" th:href="@{home}">Home</a>
+        <a class="nav-link text-white" th:href="@{account}">Account</a>
+        <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
+        <a class="nav-link text-white" th:href="@{logout}">Logout</a>
+      </div>
     </div>
-  </div>
   </div>
 </nav>
 
 <div class="container my-3">
   <div class="row justify-content-center">
     <div class="col-md-6">
+      <div class="card">
+        <div class="card-body text-center">
+          <h6 class="card-subtitle mb-2 text-muted">Add a post</h6>
+          <form th:action="@{/post/save}" method="post" th:object="${newPost}">
+            <div class="row">
+              <div hidden>
+                <input th:attr="name='userId'" type="number" th:value="${userId}"/>
+              </div>
+              <div class="col-7">
+                <textarea type="text" th:field="*{text}" required class="form-control" id="form4Example3" rows="2"></textarea>
+              </div>
+              <div class="col-2">
+                <input class="form-control" id="form4Example2" type="date"/>
+              </div>
 
-    <div class="card">
-      <div class="card-body text-center">
-        <h6 class="card-subtitle mb-2 text-muted">Add a post</h6>
-        <form>
-          <div class="row">
-            <div class="col-7">
-            <textarea class="form-control" id="form4Example3" rows="2"></textarea>
+              <div class="col-3">
+                <input th:field="*{location}" class="form-control" id="form4Example1" placeholder="Location..." type="text"/>
+              </div>
             </div>
-            <div class="col-2">
-            <input type="date" id="form4Example2" class="form-control" />
-            </div>
+            <div class="row mt-2">
+              <div class="col-2">
+                <div class="dropdown">
+                  <button aria-expanded="false" class="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown" type="button">
+                    Category
+                  </button>
+                  <ul th:field="*{category}" class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Physical Abuse</a></li>
+                    <li><a class="dropdown-item" href="#">Cyber crime</a></li>
+                    <li><a class="dropdown-item" href="#">Defamation</a></li>
+                    <li><a class="dropdown-item" href="#">Fraud</a></li>
+                    <li><a class="dropdown-item" href="#">Robbery</a></li>
+                    <li><a class="dropdown-item" href="#">Assault</a></li>
+                    <li><a class="dropdown-item" href="#">Others</a></li>
+                  </ul>
+                </div>
+              </div>
 
-            <div class="col-3">
-              <input type="text" id="form4Example1" class="form-control" placeholder="Location..." />
+              <div class="col-5 ms-4 me-auto">
+                <input class="form-control" id="formFile" type="file">
+              </div>
+              <div class="col-1 me-5">
+                <button type="submit" name="submit" class="btn btn-success" style="border-radius: 5px; width: 75px;">Post</button>
+              </div>
             </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col-2">
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Physical Abuse</a></li>
-                <li><a class="dropdown-item" href="#">Cyber crime</a></li>
-                <li><a class="dropdown-item" href="#">Defamation</a></li>
-                <li><a class="dropdown-item" href="#">Fraud</a></li>
-                <li><a class="dropdown-item" href="#">Robbery</a></li>
-                <li><a class="dropdown-item" href="#">Assault</a></li>
-                <li><a class="dropdown-item" href="#">Others</a></li>
-              </ul>
-            </div>
-            </div>
-
-            <div class="col-5 ms-4 me-auto">
-              <input class="form-control" type="file" id="formFile">
-            </div>
-            <div class="col-1 me-5">
-              <button type="submit" class="btn btn-success" style="border-radius: 20px">Post</button>
-            </div>
-
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-    </div>
-
-
   </div>
 </div>
-
 <hr>
 <div class="container my-2">
   <div class="row justify-content-center">
     <div class="col-8">
-
-      <div class="card" >
-        <div class="row justify-content-center">
-        <img src="http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRiULU6xp8Ls7qSNmipLUuaC9BMdy_8j_vvz6KfXTpoaRusojsRb0x2hBNdmeZrCwPzuNflBFvgz1a2yrk" style="width: 20rem" class="card-img-top" alt="...">
+      <div class="card container mb-5 p-2" th:each="post: ${posts}" style="marginBottom: 1rem; backgroundColor: red;">
+        <div class="row mt-2" style="display: flex;">
+          <p style="flex: 1;" th:text="${post.date}">Date</p>
+          <p style="flex: 1; text-align: right;" th:text="${post.location}">Location</p>
         </div>
-        <hr>
-        <div class="card-body">
-
-          <div class="container">
-            <div class="row">
-          <p class="card-text">Cristiano Ronaldo dos Santos Aveiro GOIH ComM (Portuguese pronunciation: [kɾiʃˈtjɐnu ʁɔˈnaɫdu]; born 5 February 1985) is a Portuguese professional footballer who plays as a forward and captains the Portugal national team. He is currently a free agent. Widely regarded as one of the greatest players of all time, Ronaldo has won five Ballon d'Or awards[note 3] and four European Golden Shoes, the most by a European player. He has won 32 trophies in his career, including seven league titles, five UEFA Champions Leagues, and the UEFA European Championship. Ronaldo holds the records for most appearances (183), goals (140), and assists (42) in the Champions League, goals in the European Championship (14), international goals (118), and international appearances by a European (192). He is one of the few players to have made over 1,100 professional career appearances, and has scored over 800 official senior career goals for club and country. He is the first player to score in five World Cup tournaments.</p>
-            </div>
-
-            <hr>
-            <div class="row ">
-              <div class="col-3 ms-auto">
-                <p >Lahore | 20-12-2021</p>
-
-              </div>
-
-            </div>
-            <hr>
-
-            <div class="row">
-              <div class="col-8">
-          <input type="text" id="form4Exampl41" class="form-control" placeholder="comment.." style="border-radius: 20px"/>
-              </div>
-                <div class="col-2 ms-auto">
-          <a href="#" class="btn btn-primary" style="border-radius: 20px">Post</a>
-                  <input type="button"
-                         value="Go Somewhere Else"
-                         onclick="location.href='<%: Url.Action('', 'UserController') %>'" />
-            </div>
-            </div>
-        </div>
+        <div class="row justify-content-center mt-2" th:text="${post.category}">Category</div>
+        <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
+        <div class="row">
+          <div class="col-8">
+            <input class="form-control" id="form4Exampl41" placeholder="comment.."
+                   style="border-radius: 20px"
+                   type="text"/>
+          </div>
+          <div class="col-2 ms-auto">
+            <a class="btn btn-primary" href="#" style="border-radius: 20px">Post</a>
+            <input onclick="location.href='<%: Url.Action('', 'UserController') %>'"
+                   type="button"
+                   value="Go Somewhere Else"/>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 
 
 <!--footer-->
 <div
-        class=" text-center bg-primary">
+    class=" text-center bg-primary">
   <!-- Copyright -->
   <div class="text-white text-center my-2">
     Copyright © 2022. All rights reserved.

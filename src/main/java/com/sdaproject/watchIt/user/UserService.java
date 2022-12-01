@@ -10,6 +10,18 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
+    public boolean authenticate(User credentials) {
+        Optional<User> found =  userRepo.findByEmail(credentials.getEmail());
+        if(found.isPresent()){
+            System.out.println("User found: "+ found.get());
+            User userFound = found.get();
+            if(userFound.getPassword().equals(credentials.getPassword()))
+                return true;
+            else return false;
+        } else {
+            return false;
+        }
+    }
     public User addUser(User newUser) {
         newUser.setBlocked(false);
         User createdUser = userRepo.save(newUser);

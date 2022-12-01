@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import javax.swing.text.html.HTML;
 import java.sql.Date;
 import java.util.List;
 
@@ -14,16 +13,12 @@ public class PostController {
     @Autowired PostService postservices;
     public boolean showSearchDiv=false;
     public boolean showsearchresult=false;
-    @GetMapping("/savepost")
-    public String savePost(@RequestParam("id") Post post){
-        postservices.save(post);
-        return "redirect:/home";
-    }
 
-    @GetMapping("/newpost")
-    public String showPostForm(Model model){
-        model.addAttribute("post",new Post());
-        return "Post_Form";
+    @PostMapping("/save")
+    public String addPost(Post newPost){
+        System.out.println(newPost);
+        postservices.save(newPost);
+        return "redirect:/feed";
     }
     @GetMapping("/getallposts")
     public List<Post> getPosts() {
