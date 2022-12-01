@@ -1,10 +1,8 @@
 package com.sdaproject.watchIt.post;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -14,7 +12,7 @@ public class PostController {
     @Autowired PostService postservices;
 
     @GetMapping("/savepost")
-    public String savePost(Post post){
+    public String savePost(@RequestParam("{userid}")Post post){
         postservices.save(post);
         return "redirect:/home";
     }

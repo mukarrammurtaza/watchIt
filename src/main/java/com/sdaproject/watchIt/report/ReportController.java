@@ -38,7 +38,7 @@ public ResponseEntity<Report> addReport(@RequestBody Report newReport) {
         return reportService.getUnProcessedReports();
     }
     @GetMapping("/getuserposts")
-    public Iterable<Report> getUserReports(String id){
+    public Iterable<Report> getUserReports(@RequestParam("id") String id){
         return reportService.getUserReports(id);
     }
     @GetMapping("/processreport")
