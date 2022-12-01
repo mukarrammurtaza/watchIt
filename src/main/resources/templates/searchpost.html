@@ -16,65 +16,87 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link text-white"  th:href="@{account}">Account</a>
-                <a class="nav-link text-white"  th:href="@{feed}">Feed</a>
-                <a class="nav-link text-white"  th:href="@{report}">Report</a>
-                <a class="nav-link text-white"  th:href="@{searchpost}">Search</a>
-                <a class="nav-link text-white"  th:href="@{hotspot}">Crime Hotspots</a>
+            <div class="navbar-nav me-auto">
+
+                <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
+                <a class="nav-link text-white" th:href="@{report}">Report</a>
+                <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
+                <a class="nav-link text-white" th:href="@{account}">Account</a>
+                <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
+
             </div>
+            <a class="nav-link text-white me-3" th:href="@{logout}">Logout</a>
         </div>
     </div>
 </nav>
-<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-    <form>
-        <h3 class="p-2">Search</h3>
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-            <input type="text" id="searchtext" class="form-control form-control-lg"
-                   placeholder="keyword" />
-            <label class="form-label" for="searchtext">Enter Keyword</label>
-        </div>
-        <div id="advancedSearchDiv" class="form-outline mb-4" th:if="${showSearchDiv}">
-            <input type="text" id="categorytext" class="form-control form-control-lg"
-                   placeholder="category" />
-            <label class="form-label" for="categorytext">Enter Category</label>
-            <input type="text" id="locationtext" class="form-control form-control-lg"
-                   placeholder="location" />
-            <label class="form-label" for="locationtext">Enter Location</label>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="advancedSearchDate">Date</label>
-                <input type="datetime-local" id="advancedSearchDate" class="form-control" />
-            </div>
-        </div>
-        <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" th:onclick="|window.location.href='/post/searchwrapper'|">Submit</button>
-            <button type="button" th:onclick="|window.location.href='/post/showsearchdiv'|">Advanced Search</button>
-        </div>
-        <!--saved comments modal-->
-        <div th:if="${showsearchresult}">
-            <div th:if="${searchempty}">
-                <p>No results...</p>
-            </div>
-            <div th:each="result : ${searchresult}">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p th:text="${result.getText()}">This is the comment text</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <img src="../static/imgs/user.png" alt="avatar" width="25"
-                                     height="25" th:src="@{imgs/user.png}">
-                                <p class="small mb-0 ms-2" th:text="${result.getUserId()}">User Name</p>
-                                <p class="small mb-0 ms-2" th:text="${result.getCategory()}">Category</p>
-                                <p class="small mb-0 ms-2 text-muted" th:text="${result.getDate()}">14-08-22</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form>
+                <h3 class="p-2 m-2 text-muted text-center">Search</h3>
+                <div class="mb-4 input-group">
+
+                    <label class="input-group-text"  for="searchtext">Enter Keyword</label>
+                    <input type="text" id="searchtext" aria-label="Enter Keyword" class="form-control"
+                    />
+
+                </div>
+
+                <div id="advancedSearchDiv" class="form-outline mb-4" th:if="${showSearchDiv}">
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <label class="form-label" for="categorytext">Enter Category</label>
+                            <input type="text" id="categorytext" class="form-control "
+                                   placeholder="category" />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" for="locationtext">Enter Location</label>
+                            <input type="text" id="locationtext" class="form-control "
+                                   placeholder="location" />
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row form-outline mb-4">
+                        <div class="col-6">
+                            <label class="form-label" for="advancedSearchDate">Date</label>
+                            <input type="datetime-local" id="advancedSearchDate" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center text-lg-start mt-4 pt-2">
+                    <button class="btn btn-primary" type="button" th:onclick="|window.location.href='/post/searchwrapper'|">Submit</button>
+                    <button class="btn btn-warning" type="button" th:onclick="|window.location.href='/post/showsearchdiv'|">Advanced Search</button>
+                </div>
+                <!--saved comments modal-->
+                <div th:if="${showsearchresult}">
+                    <div th:if="${searchempty}">
+                        <p>No results...</p>
+                    </div>
+                    <div th:each="result : ${searchresult}">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p th:text="${result.getText()}">This is the comment text</p>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img src="../static/imgs/user.png" alt="avatar" width="25"
+                                             height="25" th:src="@{imgs/user.png}">
+                                        <p class="small mb-0 ms-2" th:text="${result.getUserId()}">User Name</p>
+                                        <p class="small mb-0 ms-2" th:text="${result.getCategory()}">Category</p>
+                                        <p class="small mb-0 ms-2 text-muted" th:text="${result.getDate()}">14-08-22</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </form>
+            </form>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>

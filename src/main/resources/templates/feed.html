@@ -15,21 +15,19 @@
 <nav class="navbar navbar-expand-lg bg-primary ">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">WatchIt</a>
-    <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler"
-            data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav me-auto">
+
         <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
         <a class="nav-link text-white" th:href="@{report}">Report</a>
         <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
-        <a aria-current="page" class="nav-link text-white" th:href="@{home}">Home</a>
         <a class="nav-link text-white" th:href="@{account}">Account</a>
         <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
-        <a class="nav-link text-white" th:href="@{logout}">Logout</a>
       </div>
+      <a class="nav-link text-white me-3" th:href="@{logout}">Logout</a>
     </div>
   </div>
 </nav>

@@ -26,19 +26,19 @@
           <h3 class="p-2">Login</h3>
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input th:field="*{email}" type="email" id="form3Example3" class="form-control form-control-lg"
-                   placeholder="Enter username" />
-            <label class="form-label" for="form3Example3">Username</label>
+            <input required th:field="*{email}" type="email" id="form3Example3" class="form-control form-control-lg"
+                   placeholder="Enter email" />
+            <label class="form-label" for="form3Example3">Email</label>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
-            <input th:field="*{password}" type="password" id="form3Example4" class="form-control form-control-lg"
+            <input required th:field="*{password}" type="password" id="form3Example4" class="form-control form-control-lg"
                    placeholder="Enter password" />
             <label class="form-label" for="form3Example4">Password</label>
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="submit">login</button>
+            <button class="btn btn-primary" type="submit" >Login</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/signup}" class="link-success">Sign Up</a></p>
           </div>
         </form>
