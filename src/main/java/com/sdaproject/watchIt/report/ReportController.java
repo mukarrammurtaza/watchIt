@@ -21,8 +21,9 @@ public class ReportController {
         model.addAttribute("report",new Report());
         return "report";
     }
+    @GetMapping("/addReport")
     @PostMapping
-public ResponseEntity<Report> addReport(@RequestBody Report newReport) {
+public ResponseEntity<Report> addReport(@RequestParam("id") @RequestBody Report newReport) {
     return new ResponseEntity<Report>(reportService.addReport(newReport), HttpStatus.ACCEPTED);
 }
     @GetMapping("/getallreports")
@@ -38,7 +39,7 @@ public ResponseEntity<Report> addReport(@RequestBody Report newReport) {
         return reportService.getUnProcessedReports();
     }
     @GetMapping("/getuserposts")
-    public Iterable<Report> getUserReports(String id){
+    public Iterable<Report> getUserReports(@RequestParam("id") String id){
         return reportService.getUserReports(id);
     }
     @GetMapping("/processreport")
