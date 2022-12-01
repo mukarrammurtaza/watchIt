@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
 import java.util.Optional;
 
 @Controller
@@ -86,12 +87,13 @@ public class MainController {
         if(req.getSession().getAttribute("email") != null) {
             String email = req.getSession().getAttribute("email").toString();
             Optional<User> loggedInUser = userRepo.findByEmail(email);
-            if(loggedInUser.isPresent()) {
-                model.addAttribute("userDetails", userService.getDetails(loggedInUser.get().getId()));
-                model.addAttribute("userPosts", postService.getUserPosts(loggedInUser.get().getId()));
-                model.addAttribute("userReports", reportService.getUserReports(loggedInUser.get().getId()));
-                return "Account";
-            } else return "redirect:/login";
+            String userImg = Base64.getEncoder().encodeToString(loggedInUser.get().getProfile_image());
+            userImg = "data:image/jpeg;charset=utf-8;base64,".concat(userImg);
+            model.addAttribute("userImg", userImg);
+            model.addAttribute("userDetails", userService.getDetails(loggedInUser.get().getId()));
+            model.addAttribute("userPosts", postService.getUserPosts(loggedInUser.get().getId()));
+            model.addAttribute("userReports", reportService.getUserReports(loggedInUser.get().getId()));
+            return "account";
         } else {
             return "redirect:/login";
         }
