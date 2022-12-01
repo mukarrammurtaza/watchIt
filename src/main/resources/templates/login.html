@@ -37,12 +37,9 @@
                    placeholder="Enter password" />
             <label class="form-label" for="form3Example4">Password</label>
           </div>
-
-
-
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="button" th:onclick="|window.location.href='/feed'|">login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/signup}" class="link-success">Sign Up</a></p>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/user/new}" class="link-success">Sign Up</a></p>
           </div>
 
         </form>
