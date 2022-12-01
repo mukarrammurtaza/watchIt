@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <title>Landing Page</title>
+</head>
+<body>
+<!--header-->
+<nav class="navbar navbar-expand-lg bg-primary ">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">WatchIt</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+        <a class="nav-link text-white" href="#">Account</a>
+        <a class="nav-link text-white" th:href="@{/makeReport}">Report</a>
+        <a class="nav-link text-white active" href="#">Approve Posts</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<h3 class="text-center text-muted m-3">Pending Posts</h3>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+
+            <div class="card" >
+              <div class="row justify-content-center">
+                <img src="http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRiULU6xp8Ls7qSNmipLUuaC9BMdy_8j_vvz6KfXTpoaRusojsRb0x2hBNdmeZrCwPzuNflBFvgz1a2yrk" style="width: 20rem" class="card-img-top" alt="...">
+              </div>
+              <hr>
+              <div class="card-body">
+
+                <div class="container">
+                  <div class="row">
+                    <p class="card-text">Cristiano Ronaldo dos Santos Aveiro GOIH ComM (Portuguese pronunciation: [kɾiʃˈtjɐnu ʁɔˈnaɫdu]; born 5 February 1985) is a Portuguese professional footballer who plays as a forward and captains the Portugal national team. He is currently a free agent. Widely regarded as one of the greatest players of all time, Ronaldo has won five Ballon d'Or awards[note 3] and four European Golden Shoes, the most by a European player. He has won 32 trophies in his career, including seven league titles, five UEFA Champions Leagues, and the UEFA European Championship.</p>
+                  </div>
+
+                  <hr>
+                  <div class="row ">
+                    <div class="col-5">
+                      <button type="submit" class="btn btn-success" style="border-radius: 20px">Approve</button>
+                      <button type="submit" class="btn btn-danger" style="border-radius: 20px">Reject</button>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <p >Lahore | 20-12-2021</p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+
+
+<!--footer-->
+<div
+        class=" text-center bg-primary">
+  <!-- Copyright -->
+  <div class="text-white text-center my-2">
+    Copyright © 2022. All rights reserved.
+  </div>
+  <!-- Copyright -->
+
+  <!-- Right -->
+
+</div>
+</body>
+</html>
+
