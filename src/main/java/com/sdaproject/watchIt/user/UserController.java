@@ -21,26 +21,18 @@ public class UserController {
         return userservices.getAllUsers();
     }
 
-    @GetMapping("/details")
-    public User showDetails(@RequestParam("id") int id) {
-        return userservices.getDetails(id);
-    }
-
-    @GetMapping("/new")
-    public String showNewForm(Model model){
-        model.addAttribute("user",new User());
-        return "signup";
-    }
-
-    @PostMapping()
-    public ResponseEntity<User> registerUser(@RequestBody User inputUser) {
-        System.out.println(inputUser);
-        return new ResponseEntity<User>(userservices.addUser(inputUser), HttpStatus.ACCEPTED);
+    @GetMapping("/{userId}")
+    public User showDetails(@PathVariable int userId) {
+        return userservices.getDetails(userId);
     }
 
     @PostMapping("/save")
     public String saveUser(User user) {
-        userservices.addUser(user);
-        return "redirect:/";
+        try {
+            userservices.addUser(user);
+            return "redirect:/feed";
+        } catch (Exception err) {
+            return "redirect:/signup";
+        }
     }
 }

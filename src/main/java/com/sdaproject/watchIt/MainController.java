@@ -15,11 +15,16 @@ public class MainController {
     }*/
     @GetMapping()
     public String showLoginPage() {
+        System.out.println("Login function called");
         return "Login";
     }
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String navigateToLoginPage() {
         return "Login";
+    }
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup";
     }
     @GetMapping("/report")
     public String showReportPage() {
@@ -29,6 +34,9 @@ public class MainController {
     public String showFeedPage() {
         return "Feed";
     }
+
+    @GetMapping("/searchpost")
+    public String showSearchPostPage() {return "searchpost";}
     @GetMapping("/account")
     public String showAccountPage() {
         return "Account";

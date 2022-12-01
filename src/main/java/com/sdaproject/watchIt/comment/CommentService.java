@@ -9,5 +9,10 @@ import java.util.List;
 @Service
 public class CommentService {
     @Autowired private CommentRepository commentRepo;
-
+    public Comment addComment(Comment inputComment) {
+        return commentRepo.save(inputComment);
+    };
+    public String deleteComment(int id) {
+        return "Comment successfully deleted";
+    }
 }

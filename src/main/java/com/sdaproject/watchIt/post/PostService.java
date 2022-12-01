@@ -75,15 +75,16 @@ public class PostService {
         });
         return temp2;
     }
-    public List<Post> getUnApprovedPosts() {
+    public List<Post> getUserPosts(int id) {
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
         temp.forEach(post -> {
-            if(!post.isApproved())//returnin all Approved Posts
+            if(post.getUserId() == id)
                 temp2.add(post);
         });
         return temp2;
     }
+    
     public List<Post> getPendingPosts() {//same as unApproved posts
         Iterable<Post> temp = postRepo.findAll();
         List<Post> temp2 = new ArrayList<Post>();
@@ -97,11 +98,9 @@ public class PostService {
     public List<Post> simpleSearch(String keyword){
         List<Post> currentPosts=getApprovedPosts();
         List<Post> searchResult=new ArrayList<Post>();
-        for (int i=0;i< currentPosts.size();i++)
-        {
-            String postTxt=currentPosts.get(i).getText().toLowerCase();
-            if(postTxt.indexOf(keyword.toLowerCase())!=-1)
-            {
+        for (int i=0;i< currentPosts.size();i++) {
+            String postTxt = currentPosts.get(i).getText().toLowerCase();
+            if (postTxt.indexOf(keyword.toLowerCase()) != -1) {
                 searchResult.add(currentPosts.get(i));
             }
         }

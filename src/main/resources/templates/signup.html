@@ -15,7 +15,6 @@
 				background-position: center center;
 				background-attachment: fixed;
 			}
-
 		#ui{
 			background-color: #333;
 			padding: 30px;
@@ -31,80 +30,73 @@
 </head>
 
 <body>
-<div class="container-fluid bg-primary text-white text-center p-4 mb-3">
-  <h2>WatchIt</h2>
-
-
-
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-      <div id="ui">
-        <h1 class="text-center">Create Your Account</h1>
-        <br>
-        <form th:action="@{/user/save}" method="post" th:object="${user}">
-          <div class="row text-center">
-            <div class="col-lg-6">
-              <label>Name</label>
-              <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Enter your Name" required minlength="2" maxlength="40">
-            </div>
-
-            <div class="col-lg-6">
-              <label>CNIC</label>
-              <input type="text" name="CNIC" th:field="*{CNIC}" class="form-control" placeholder="Enter your CNIC" required minlength="13" maxlength="13">
-            </div>
-
-          </div>
+  <div class="container-fluid bg-primary text-white text-center p-4 mb-3">
+    <h2>WatchIt</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div id="ui">
+          <h1 class="text-center">Create Your Account</h1>
           <br>
-          <div class="text-center">
-            <label>Email</label>
-            <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Enter your Email Address" required minlength="8" maxlength="40">
-          </div>
-          <br>
-          <div class="row">
+          <form th:action="@{/user/save}" method="post" th:object="${user}">
+            <div class="row text-center">
+              <div class="col-lg-6">
+                <label>Name</label>
+                <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Enter your Name" required minlength="2" maxlength="40">
+              </div>
 
-            <div class="col-lg-6 text-center">
-              <label>Password</label>
-              <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter New Password" required minlength="3" maxlength="25">
+              <div class="col-lg-6">
+                <label>CNIC</label>
+                <input type="text" name="CNIC" th:field="*{CNIC}" class="form-control" placeholder="Enter your CNIC" required minlength="13" maxlength="13">
+              </div>
+
             </div>
-
-            <div class="col-lg-6 text-center">
-              <label>Re-type Password</label>
-              <input type="password" name="confirm_password" class="form-control" placeholder="Re-type the Password" required minlength="3" maxlength="25">
-            </div>
-
-          </div>
-          <br>
-          <div class="text-center">
-            <label>Date of Birth</label>
             <br>
-            <input type="date" name="dateofbirth" th:field="*{DOB}" class="form-control" placeholder="Enter Your Date of Birth" required>
+            <div class="text-center">
+              <label>Email</label>
+              <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="Enter your Email Address" required minlength="8" maxlength="40">
+            </div>
+            <br>
+            <div class="row">
+
+              <div class="col-lg-6 text-center">
+                <label>Password</label>
+                <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Enter New Password" required minlength="3" maxlength="25">
+              </div>
+
+              <div class="col-lg-6 text-center">
+                <label>Re-type Password</label>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Re-type the Password" required minlength="3" maxlength="25">
+              </div>
+
+            </div>
+            <br>
+            <div class="text-center">
+              <label>Date of Birth</label>
+              <br>
+              <input type="date" name="dateofbirth" th:field="*{DOB}" class="form-control" placeholder="Enter Your Date of Birth" required>
 
 
-          </div>
-          <br>
-          <input type="checkbox" id="newsletter" name="newsletter" value="check">
-          <label for="newsletter">I accept the terms and conditions</label>
-          <br>
-          <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">
-          <br>
-          <div class="text-center">
-            <label>Already have an account?</label>
-            <a href="login.html" style="color:white;"><u>Sign In</u></a>
-          </div>
-        </form>
+            </div>
+            <br>
+            <input type="checkbox" id="newsletter" name="newsletter" value="check">
+            <label for="newsletter">I accept the terms and conditions</label>
+            <br>
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-block">
+            <br>
+            <div class="text-center">
+              <label>Already have an account?</label>
+              <a href="login.html" style="color:white;"><u>Sign In</u></a>
+            </div>
+          </form>
+
+        </div>
 
       </div>
-
     </div>
   </div>
-  <div class="col-lg-3">
-  </div>
-
-</div>
-
 </div>
 <div
         class=" text-center fixed-bottom  bg-primary">

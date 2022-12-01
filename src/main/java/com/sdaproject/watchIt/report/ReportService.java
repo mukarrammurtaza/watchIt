@@ -31,7 +31,12 @@ public class ReportService {
         r.setProcessed(false);
 
         return reportRepo.save(r);
+        
+}
 
+    @GetMapping("/newReports")
+    public Iterable<Report> getNewReports(){
+        return null;
     }
     @GetMapping("/allreports")
     public Iterable<Report>  getAllReports() {
