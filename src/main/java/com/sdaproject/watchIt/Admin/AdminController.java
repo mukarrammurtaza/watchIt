@@ -1,8 +1,11 @@
 package com.sdaproject.watchIt.Admin;
 
+import com.sdaproject.watchIt.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -13,6 +16,10 @@ public class AdminController {
     @PostMapping
     public Admin addAdmin(@RequestBody Admin inputAdmin) {
         return adminServices.addAdmin(inputAdmin);
+    }
+    @GetMapping("/all")
+    public List<Admin> getAllAdmins() {
+        return adminServices.getAllAdmins();
     }
     @PutMapping("/block/{userId}")
     public String blockUser(@PathVariable int userId) {

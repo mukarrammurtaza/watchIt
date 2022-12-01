@@ -1,13 +1,9 @@
 package com.sdaproject.watchIt.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-
 
 //@RestController
 @Controller
@@ -15,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userservices;
+
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping
     public Iterable<User> showUsers() {
@@ -29,6 +28,8 @@ public class UserController {
     @PostMapping("/save")
     public String saveUser(User user) {
         try {
+            user.setBlocked(false);
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userservices.addUser(user);
             return "redirect:/feed";
         } catch (Exception err) {
