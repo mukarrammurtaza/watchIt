@@ -44,7 +44,16 @@ public class MainController {
         req.getSession().invalidate();
         return "redirect:/login";
     }
-
+    @GetMapping("/reviewreports")
+    public String showReviewReport()
+    {
+        return "reviewReports";
+    }
+    @GetMapping("/approveposts")
+    public String showApprovePosts()
+    {
+        return "approvePosts";
+    }
     @GetMapping("/signup")
     public String showSignupPage(Model model) {
         model.addAttribute("user", new User());
