@@ -20,14 +20,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
-
-        <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
-        <a class="nav-link text-white" th:href="@{report}">Report</a>
-        <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
-        <a class="nav-link text-white" th:href="@{account}">Account</a>
-        <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
-        <a class="nav-link text-white" th:href="@{reviewreports}">Review Reports</a>
-        <a class="nav-link text-white" th:href="@{approveposts}">Approve Posts</a>
+        <a aria-current="page" class="nav-link text-white" th:href="@{/feed}">Feed</a>
+        <a class="nav-link text-white" th:href="@{/report}">Report</a>
+        <a class="nav-link text-white" th:href="@{/searchpost}">Search</a>
+        <a class="nav-link text-white" th:href="@{/account}">Account</a>
+        <a class="nav-link text-white" th:href="@{/hotspot}">Crime Hotspots</a>
+        <a class="nav-link text-white" th:if="${police}" th:href="@{/reviewreports}">Review Reports</a>
+        <a class="nav-link text-white" th:if="${admin}" th:href="@{/approveposts}">Approve Posts</a>
       </div>
       <a class="nav-link text-white me-3" th:href="@{logout}">Logout</a>
     </div>
@@ -193,7 +192,7 @@
         <div class="row mt-2" style="display: flex;">
           <p style="flex: 1;" th:text="${report.reportDate}">Date</p>
           <p style="flex: 1; text-align: center;" th:text="${report.location}">Location</p>
-          <p style="flex: 1; text-align: right;" th:text="${report.processed}">Location</p>
+          <p style="flex: 1; text-align: right;" th:text="${report.processed} ? 'Report Processed' : 'To be Processed'">Location</p>
         </div>
         <div class="row justify-content-center mt-2 mb-2" th:text="${report.text}">Rona dhona</div>
       </div>

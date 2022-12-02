@@ -15,19 +15,20 @@
 <nav class="navbar navbar-expand-lg bg-primary ">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">WatchIt</a>
-    <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+    <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
             data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
-        <a aria-current="page" class="nav-link text-white" th:href="@{feed}">Feed</a>
-        <a class="nav-link text-white" th:href="@{report}">Report</a>
-        <a class="nav-link text-white" th:href="@{searchpost}">Search</a>
-        <a class="nav-link text-white" th:href="@{account}">Account</a>
-        <a class="nav-link text-white" th:href="@{hotspot}">Crime Hotspots</a>
-        <a class="nav-link text-white" th:href="@{reviewreports}">Review Reports</a>
-        <a class="nav-link text-white" th:href="@{approveposts}">Approve Posts</a>
+        <a aria-current="page" class="nav-link text-white" th:href="@{/feed}">Feed</a>
+        <a class="nav-link text-white" th:href="@{/report}">Report</a>
+        <a class="nav-link text-white" th:href="@{/searchpost}">Search</a>
+        <a class="nav-link text-white" th:href="@{/account}">Account</a>
+        <a class="nav-link text-white" th:href="@{/hotspot}">Crime Hotspots</a>
+        <a class="nav-link text-white" th:href="@{/reviewreports}" th:if="${police}">Review Reports</a>
+        <a class="nav-link text-white" th:href="@{/approveposts}" th:if="${admin}">Approve Posts</a>
       </div>
       <a class="nav-link text-white me-3" th:href="@{logout}">Logout</a>
     </div>
@@ -76,7 +77,6 @@
                   </ul>
                 </div>
               </div>
-
               <div class="col-5 ms-4 me-auto">
                 <input class="form-control" id="formFile" type="file">
               </div>
@@ -99,25 +99,27 @@
       <div class="card container mb-5 p-2" style="marginBottom: 1rem;" th:each="post: ${posts}">
         <div class="row mt-2" style="display: flex;">
           <p style="flex: 1;" th:text="${post.date}">Date</p>
+          <p style="flex: 1; text-align: center; font-size: 20px; font-weight: bold;" th:text="${post.category}">
+            Category</p>
           <p style="flex: 1; text-align: right;" th:text="${post.location}">Location</p>
         </div>
-        <div class="row justify-content-center mt-2" th:text="${post.category}">Category</div>
-        <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
         <form method="post" th:action="@{/postComment/new}" th:object="${newComment}">
-          <div class="col-8">
+          <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
+          <div class="row mt-2 justify-content-center">
+            <div class="col-10">
             <input class="form-control" placeholder="write a comment.."
                    style="border-radius: 20px"
                    th:field="*{text}" type="text"/>
+            </div>
           </div>
-          <div hidden>
-            <input th:attr="name='postId'" th:value="${post.postId}" type="number"/>
-          </div>
-          <button class="btn btn-primary" name="submit" type="submit">Comment</button>
-          <div class="col-2 ms-auto">
-            <a class="btn btn-secondary" th:href="@{postComment/} + ${post.postId}">Show Comments</a>
+          <div class="row mt-4 justify-content-center">
+            <div hidden>
+              <input th:attr="name='postId'" th:value="${post.postId}" type="number"/>
+            </div>
+            <div class="col-6 ml-3 justify-content-left"><button class="btn btn-primary" name="submit" type="submit">Comment</button></div>
+            <div class="col-6 mr-3 d-flex justify-content-end"><a class="btn btn-secondary ml-auto" th:href="@{postComment/} + ${post.postId}">Show Comments</a></div>
           </div>
         </form>
-      </div>
     </div>
   </div>
 </div>

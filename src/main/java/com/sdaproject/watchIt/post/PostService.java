@@ -41,7 +41,7 @@ public class PostService {
 
     public void save(Post post) {
         post.setApproved(false);
-        post.setCategory("Crime");
+        post.setCategory("Social Awareness");
         LocalDate D = LocalDate.now();
         post.setDate(java.sql.Date.valueOf(D));
         postRepo.save(post);

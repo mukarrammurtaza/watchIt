@@ -1,6 +1,7 @@
 package com.sdaproject.watchIt;
 
 import com.sdaproject.watchIt.comment.Comment;
+import com.sdaproject.watchIt.police.Police;
 import com.sdaproject.watchIt.post.Post;
 import com.sdaproject.watchIt.post.PostRepository;
 import com.sdaproject.watchIt.post.PostService;
@@ -61,7 +62,7 @@ public class MainController {
     @GetMapping("/reviewreports")
     public String showReviewReport(Model model, HttpServletRequest req)
     {
-        if(req.getSession().getAttribute("admin") != null){
+        if(req.getSession().getAttribute("police") != null){
             model.addAttribute("reports", reportService.getUnProcessedReports());
             return "reviewReports";
         } else return "redirect:/feed";
@@ -80,12 +81,20 @@ public class MainController {
         model.addAttribute("user", new User());
         return "signup";
     }
+
+    @GetMapping("/signup-police")
+    public String showPoliceSignupPage(Model model) {
+        model.addAttribute("police", new Police());
+        return "signup-police";
+    }
     @GetMapping("/report")
     public String showReportPage(Model model, HttpServletRequest req) {
         if(req.getSession().getAttribute("email") != null) {
             String email = req.getSession().getAttribute("email").toString();
             if(req.getSession().getAttribute("admin") != null)
                 model.addAttribute("admin", true);
+            if(req.getSession().getAttribute("police") != null)
+                model.addAttribute("police", true);
             model.addAttribute("userId", userRepo.findByEmail(email).get().getId());
             model.addAttribute("newReport", new Report());
             return "Report";
@@ -97,6 +106,8 @@ public class MainController {
             String email = req.getSession().getAttribute("email").toString();
             if(req.getSession().getAttribute("admin") != null)
                 model.addAttribute("admin", true);
+            if(req.getSession().getAttribute("police") != null)
+                model.addAttribute("police", true);
             model.addAttribute("userId", userRepo.findByEmail(email).get().getId());
             model.addAttribute("newPost", new Post());
             model.addAttribute("posts", postService.getApprovedPosts());
@@ -106,7 +117,13 @@ public class MainController {
     }
 
     @GetMapping("/searchpost")
-    public String showSearchPostPage() {return "searchpost";}
+    public String showSearchPostPage(Model model, HttpServletRequest req) {
+        if(req.getSession().getAttribute("admin") != null)
+            model.addAttribute("admin", true);
+        if(req.getSession().getAttribute("police") != null)
+            model.addAttribute("police", true);
+        return "searchpost";
+    }
 
     @GetMapping("/account")
     public String showAccountPage(Model model, HttpServletRequest req) {
@@ -121,6 +138,8 @@ public class MainController {
             else model.addAttribute("userImg", "https://cdn-icons-png.flaticon.com/512/64/64572.png");
             if(req.getSession().getAttribute("admin") != null)
                 model.addAttribute("admin", true);
+            if(req.getSession().getAttribute("police") != null)
+                model.addAttribute("police", true);
             model.addAttribute("savedComments", SCrepo.findSavedCommentByUserId(loggedInUser.get().getId()));
             model.addAttribute("userDetails", userService.getDetails(loggedInUser.get().getId()));
             model.addAttribute("userPosts", postService.getUserPosts(loggedInUser.get().getId()));
@@ -132,7 +151,11 @@ public class MainController {
     }
 
     @GetMapping("/hotspot")
-    public String showHotSpotPage() {
+    public String showHotSpotPage(Model model, HttpServletRequest req) {
+        if(req.getSession().getAttribute("admin") != null)
+            model.addAttribute("admin", true);
+        if(req.getSession().getAttribute("police") != null)
+            model.addAttribute("police", true);
         return "hotspot";
     }
 }

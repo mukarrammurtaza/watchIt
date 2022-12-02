@@ -45,15 +45,15 @@
         </div>
         <div class="row justify-content-center mt-2" th:text="${post.category}">Category</div>
         <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
-        <div class="row ">
-          <div class="col-5">
-            <form th:action="@{/post/approve}" method="post" th:object="${targetPost}">
+        <div class="row">
+          <div class="row col-5">
+            <form class="col-5" th:action="@{/post/approve}" method="post" th:object="${targetPost}">
               <div hidden>
                 <input th:attr="name='postId'" th:value="${post.postId}" type="number"/>
               </div>
               <button class="btn btn-success" style="border-radius: 20px" type="submit">Approve</button>
             </form>
-            <form th:action="@{/post/delete}" method="post" th:object="${targetPost}">
+            <form class="col-5"  th:action="@{/post/delete}" method="post" th:object="${targetPost}">
               <div hidden>
                 <input th:attr="name='postId'" th:value="${post.postId}" type="number"/>
               </div>

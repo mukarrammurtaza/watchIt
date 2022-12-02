@@ -13,8 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @DiscriminatorValue(value = "police")
 public class Police extends User {
-
-    @Column(length = 20)
+    @Column(length = 30)
     private String policeID;
-
 }

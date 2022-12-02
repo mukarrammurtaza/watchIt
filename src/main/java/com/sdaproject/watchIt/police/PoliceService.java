@@ -23,8 +23,7 @@ public class PoliceService implements PoliceInterface{
         return createdPoliceUser;
     }
     @Override
-    public Report reviewReport(int id) {
-        Optional<Report> changedReport = reportservices.processReport(id);
-        return changedReport.stream().findFirst().orElse(null);
+    public Police getDetails(int id) {
+        return policeRepo.findById(id).get();
     }
 }

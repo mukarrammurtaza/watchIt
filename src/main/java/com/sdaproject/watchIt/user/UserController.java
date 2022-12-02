@@ -1,8 +1,10 @@
 package com.sdaproject.watchIt.user;
 
+import com.sdaproject.watchIt.police.PoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,9 @@ public class UserController {
     private UserService userservices;
 
     @Autowired UserRepository userRepo;
+
+    @Autowired
+    PoliceRepository policeRepo;
     @GetMapping
     public Iterable<User> showUsers() {
         return userservices.getAllUsers();
@@ -34,8 +39,13 @@ public class UserController {
         if (userservices.authenticate(credentials)) {
             System.out.println("Validated User");
             req.getSession().setAttribute("email", credentials.getEmail());
-            if(userRepo.findByEmail(credentials.getEmail()).get().getAdmin() != null) {
-                req.getSession().setAttribute("admin", true);
+            if(userRepo.findByEmail(credentials.getEmail()).isPresent()) {
+                if(userRepo.findByEmail(credentials.getEmail()).get().getAdmin() != null)
+                    req.getSession().setAttribute("admin", true);
+            }
+            if(policeRepo.findByEmail(credentials.getEmail()).isPresent()){
+                if(policeRepo.findByEmail(credentials.getEmail()).get().getPoliceID() != null)
+                    req.getSession().setAttribute("police", true);
             }
             return "redirect:/feed";
         }

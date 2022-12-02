@@ -6,24 +6,32 @@ import com.sdaproject.watchIt.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/police")
 public class PoliceController {
     @Autowired PoliceService policeservices;
-    @PostMapping()
-    public ResponseEntity<Police> registerUser(@RequestBody Police inputPoliceUser) {
-        return new ResponseEntity<Police>(policeservices.addPolice(inputPoliceUser), HttpStatus.ACCEPTED);
+    @PostMapping("/save")
+    public String saveUser(Police newUser, @RequestParam("file") MultipartFile file) {
+        try {
+            System.out.println("Image: " + file.getOriginalFilename());
+            newUser.setProfile_image(file.getInputStream().readAllBytes());
+            newUser.setBlocked(false);
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            policeservices.addPolice(newUser);
+            return "redirect:/login";
+        } catch (Exception err) {
+            System.out.println("Exception: " + err.toString());
+            return "redirect:/signup";
+        }
     }
-    @PostMapping("/review")
-    private ResponseEntity<Report> reviewReport(int id) {
-        Report processedReport = policeservices.reviewReport(id);
-        return new ResponseEntity<Report>(processedReport, HttpStatus.ACCEPTED);
+    @GetMapping("/{policeId}")
+    public User showDetails(@PathVariable int policeId) {
+        return policeservices.getDetails(policeId);
     }
 }
