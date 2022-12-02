@@ -58,8 +58,7 @@ public class ReportService {
         return temp2;
     }
     @GetMapping("/unprocessedreports")
-    public Iterable<Report> getUnProcessedReports() {
-
+    public List<Report> getUnProcessedReports() {
         Iterable<Report> temp = reportRepo.findAll();
         List<Report> temp2 = new ArrayList<Report>();
         temp.forEach(report -> {
@@ -84,7 +83,6 @@ public class ReportService {
         return null;
     }
 
-    @GetMapping("/processreport")
     public Optional<Report> processReport(int postId) {
         Optional<Report> report = reportRepo.findById(postId);
         report.ifPresent(x -> {

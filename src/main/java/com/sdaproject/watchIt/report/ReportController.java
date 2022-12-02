@@ -39,15 +39,16 @@ public class ReportController {
     public Iterable<Report> getUnProcessedReports() {
         return reportService.getUnProcessedReports();
     }
-    @GetMapping("/processreport")
-    public Optional<Report> processReport(@RequestBody Map<Integer, Object> report) {
-        return reportService.processReport(Integer.valueOf(((Integer) report.get("id"))));
 
+    @PostMapping("/processReport")
+    public String processReport(Report report) {
+        System.out.println("Processing Report with id: " + report.getReportId());
+        reportService.processReport(report.getReportId());
+        return "redirect:/reviewreports";
     }
 
     public List<String> getHotspots() {
         return null;//TODO: ask how this is supposed to work
-
     }
 }
 

@@ -23,17 +23,19 @@ public class PostController {
         postservices.save(newPost);
         return "redirect:/feed";
     }
-    @GetMapping("/getallposts")
-    public List<Post> getPosts() {
-        return postservices.getAllPosts();
+
+    @PostMapping("/approve")
+    public String approvePost(Post post) {
+        postservices.validatePost(post.getPostId());
+        return "redirect:/approveposts";
     }
-    @GetMapping("/getapprovedposts")
-    public List<Post> getApprovedPosts() {
-        return postservices.getApprovedPosts();
-    }
-    @GetMapping("/getunapprovedposts")
-    public List<Post> getUnApprovedPosts() {
-        return postservices.getUnApprovedPosts();
+    @PostMapping("/delete")
+    public String deletePost(Post post) {
+        postservices.deletePost(post.getPostId());
+        if(post.getUserId() == 1) {
+            return "redirect:/account";
+        }
+        return "redirect:/approveposts";
     }
     @GetMapping("/simplesearch")
     public List<Post> simpleSearch()

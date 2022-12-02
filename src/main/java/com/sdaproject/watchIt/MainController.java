@@ -1,9 +1,15 @@
 package com.sdaproject.watchIt;
 
+import com.sdaproject.watchIt.comment.Comment;
 import com.sdaproject.watchIt.post.Post;
+import com.sdaproject.watchIt.post.PostRepository;
 import com.sdaproject.watchIt.post.PostService;
+import com.sdaproject.watchIt.postComment.PostComment;
+import com.sdaproject.watchIt.postComment.PostCommentRepository;
 import com.sdaproject.watchIt.report.Report;
 import com.sdaproject.watchIt.report.ReportService;
+import com.sdaproject.watchIt.savedComment.SavedComment;
+import com.sdaproject.watchIt.savedComment.SavedCommentRepository;
 import com.sdaproject.watchIt.user.User;
 import com.sdaproject.watchIt.user.UserRepository;
 import com.sdaproject.watchIt.user.UserService;
@@ -11,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
@@ -21,12 +28,19 @@ public class MainController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private PostRepository postRepo;
+
     @Autowired
     UserService userService;
     @Autowired
     UserRepository userRepo;
     @Autowired
     ReportService reportService;
+
+    @Autowired
+    private SavedCommentRepository SCrepo;
 
     @GetMapping()
     public String showLoginPage() {
@@ -45,14 +59,21 @@ public class MainController {
         return "redirect:/login";
     }
     @GetMapping("/reviewreports")
-    public String showReviewReport()
+    public String showReviewReport(Model model, HttpServletRequest req)
     {
-        return "reviewReports";
+        if(req.getSession().getAttribute("admin") != null){
+            model.addAttribute("reports", reportService.getUnProcessedReports());
+            return "reviewReports";
+        } else return "redirect:/feed";
     }
     @GetMapping("/approveposts")
-    public String showApprovePosts()
+    public String showApprovePosts(Model model, HttpServletRequest req)
     {
-        return "approvePosts";
+        if(req.getSession().getAttribute("admin") != null){
+            model.addAttribute("posts", postService.getUnApprovedPosts());
+            model.addAttribute("targetPost", new Post());
+            return "approvePosts";
+        } else return "redirect:/feed";
     }
     @GetMapping("/signup")
     public String showSignupPage(Model model) {
@@ -63,6 +84,8 @@ public class MainController {
     public String showReportPage(Model model, HttpServletRequest req) {
         if(req.getSession().getAttribute("email") != null) {
             String email = req.getSession().getAttribute("email").toString();
+            if(req.getSession().getAttribute("admin") != null)
+                model.addAttribute("admin", true);
             model.addAttribute("userId", userRepo.findByEmail(email).get().getId());
             model.addAttribute("newReport", new Report());
             return "Report";
@@ -72,9 +95,12 @@ public class MainController {
     public String showFeedPage(Model model, HttpServletRequest req) {
         if(req.getSession().getAttribute("email") != null) {
             String email = req.getSession().getAttribute("email").toString();
+            if(req.getSession().getAttribute("admin") != null)
+                model.addAttribute("admin", true);
             model.addAttribute("userId", userRepo.findByEmail(email).get().getId());
             model.addAttribute("newPost", new Post());
             model.addAttribute("posts", postService.getApprovedPosts());
+            model.addAttribute("newComment", new PostComment());
             return "Feed";
         } else return "redirect:/login";
     }
@@ -87,9 +113,15 @@ public class MainController {
         if(req.getSession().getAttribute("email") != null) {
             String email = req.getSession().getAttribute("email").toString();
             Optional<User> loggedInUser = userRepo.findByEmail(email);
-            String userImg = Base64.getEncoder().encodeToString(loggedInUser.get().getProfile_image());
-            userImg = "data:image/jpeg;charset=utf-8;base64,".concat(userImg);
-            model.addAttribute("userImg", userImg);
+            if(loggedInUser.get().getProfile_image() != null){
+                String userImg = Base64.getEncoder().encodeToString(loggedInUser.get().getProfile_image());
+                userImg = "data:image/jpeg;charset=utf-8;base64,".concat(userImg);
+                model.addAttribute("userImg", userImg);
+            }
+            else model.addAttribute("userImg", "https://cdn-icons-png.flaticon.com/512/64/64572.png");
+            if(req.getSession().getAttribute("admin") != null)
+                model.addAttribute("admin", true);
+            model.addAttribute("savedComments", SCrepo.findSavedCommentByUserId(loggedInUser.get().getId()));
             model.addAttribute("userDetails", userService.getDetails(loggedInUser.get().getId()));
             model.addAttribute("userPosts", postService.getUserPosts(loggedInUser.get().getId()));
             model.addAttribute("userReports", reportService.getUserReports(loggedInUser.get().getId()));
