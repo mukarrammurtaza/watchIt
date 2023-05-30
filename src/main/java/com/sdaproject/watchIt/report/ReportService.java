@@ -31,9 +31,6 @@ public class ReportService {
 
     public Report addReport(Report r) {
         r.setProcessed(false);
-        LocalDate D = LocalDate.now();
-        r.setReportDate(Date.valueOf(D));
-        System.out.println(r);
         return reportRepo.save(r);
     }
 

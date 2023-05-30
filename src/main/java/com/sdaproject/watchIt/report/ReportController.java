@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,8 +24,17 @@ public class ReportController {
     @PostMapping("/save")
     public String addReport(Report newReport) {
         System.out.println(newReport);
-        reportService.addReport(newReport);
-        return "redirect:/feed";
+        LocalDate D = LocalDate.now();
+        if(D.isBefore(newReport.getReportDate().toLocalDate())){
+            newReport.setReportDate(Date.valueOf(D));
+        }
+        try {
+            reportService.addReport(newReport);
+            return "redirect:/feed";
+        } catch (Exception err) {
+            System.out.println("Exception: " + err.toString());
+        }
+        return "redirect:/report";
     }
     @GetMapping("/getallreports")
     public Iterable<Report> getAllReports() {

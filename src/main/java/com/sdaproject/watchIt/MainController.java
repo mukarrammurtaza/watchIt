@@ -1,15 +1,12 @@
 package com.sdaproject.watchIt;
 
-import com.sdaproject.watchIt.comment.Comment;
 import com.sdaproject.watchIt.police.Police;
 import com.sdaproject.watchIt.post.Post;
 import com.sdaproject.watchIt.post.PostRepository;
 import com.sdaproject.watchIt.post.PostService;
 import com.sdaproject.watchIt.postComment.PostComment;
-import com.sdaproject.watchIt.postComment.PostCommentRepository;
 import com.sdaproject.watchIt.report.Report;
 import com.sdaproject.watchIt.report.ReportService;
-import com.sdaproject.watchIt.savedComment.SavedComment;
 import com.sdaproject.watchIt.savedComment.SavedCommentRepository;
 import com.sdaproject.watchIt.user.User;
 import com.sdaproject.watchIt.user.UserRepository;
@@ -18,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
@@ -122,6 +118,7 @@ public class MainController {
             model.addAttribute("admin", true);
         if(req.getSession().getAttribute("police") != null)
             model.addAttribute("police", true);
+        model.addAttribute("post", new Post());
         return "searchpost";
     }
 

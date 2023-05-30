@@ -41,10 +41,15 @@ public class PostService {
 
     public void save(Post post) {
         post.setApproved(false);
-        post.setCategory("Social Awareness");
         LocalDate D = LocalDate.now();
-        post.setDate(java.sql.Date.valueOf(D));
-        postRepo.save(post);
+        if(D.isBefore(post.getDate().toLocalDate())) {
+            post.setDate(Date.valueOf(D));
+        }
+        try {
+            postRepo.save(post);
+        } catch (Exception err) {
+            System.out.println("Exception: " + err.toString());
+        }
     }
 
     public List<Post> getAllPosts() {

@@ -50,37 +50,28 @@
                 <textarea class="form-control" id="form4Example3" required rows="2" th:field="*{text}"
                           type="text"></textarea>
               </div>
-              <div class="col-2">
-                <input class="form-control" id="form4Example2" type="date"/>
-              </div>
-
-              <div class="col-3">
+              <div class="col-5">
                 <input class="form-control" id="form4Example1" placeholder="Location..." th:field="*{location}"
                        type="text"/>
               </div>
             </div>
             <div class="row mt-2">
+              <div class="col-5 mt-2">
+                <label for="category">Category:</label>
+                <select th:field="*{category}" name="category" id="category">
+                  <option value="Cyber Crime">Cyber Crime</option>
+                  <option value="Social Awareness">Social Awareness</option>
+                  <option value="Physical Abuse">Physical Abuse</option>
+                  <option value="Defamation">Defamation</option>
+                  <option value="Fraud">Fraud</option>
+                  <option value="Robbery">Robbery</option>
+                  <option value="Assault">Assault</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <input required th:field="*{date}" class="form-control" id="form4Example2" type="date"/>
+              </div>
               <div class="col-2">
-                <div class="dropdown">
-                  <button aria-expanded="false" class="btn btn-primary dropdown-toggle"
-                          data-bs-toggle="dropdown" type="button">
-                    Category
-                  </button>
-                  <ul class="dropdown-menu" th:field="*{category}">
-                    <li><a class="dropdown-item" href="#">Physical Abuse</a></li>
-                    <li><a class="dropdown-item" href="#">Cyber crime</a></li>
-                    <li><a class="dropdown-item" href="#">Defamation</a></li>
-                    <li><a class="dropdown-item" href="#">Fraud</a></li>
-                    <li><a class="dropdown-item" href="#">Robbery</a></li>
-                    <li><a class="dropdown-item" href="#">Assault</a></li>
-                    <li><a class="dropdown-item" href="#">Others</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-5 ms-4 me-auto">
-                <input class="form-control" id="formFile" type="file">
-              </div>
-              <div class="col-1 me-5">
                 <button class="btn btn-success" name="submit" style="border-radius: 5px; width: 75px;" type="submit">
                   Post
                 </button>
@@ -104,7 +95,7 @@
           <p style="flex: 1; text-align: right;" th:text="${post.location}">Location</p>
         </div>
         <form method="post" th:action="@{/postComment/new}" th:object="${newComment}">
-          <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">Rona dhona</div>
+          <div class="row justify-content-center mt-2 mb-2" th:text="${post.text}">abcdefg</div>
           <div class="row mt-2 justify-content-center">
             <div class="col-10">
             <input class="form-control" placeholder="write a comment.."

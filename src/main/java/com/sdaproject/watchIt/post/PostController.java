@@ -1,4 +1,5 @@
 package com.sdaproject.watchIt.post;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -38,30 +38,34 @@ public class PostController {
         return "redirect:/approveposts";
     }
     @GetMapping("/simplesearch")
-    public List<Post> simpleSearch()
+    public List<Post> simpleSearch(Post p)
     {
-        return postservices.simpleSearch("8 MEN");
+        return postservices.simpleSearch(p.getText());
     }
+
 
     @GetMapping("/advancedsearch")
-    public List<Post> advancedSearch()
+    public List<Post> advancedSearch(Post p)
     {
-        return postservices.advancedSearch("8 MEN","fook","Fast", Date.valueOf("2022-11-28"));
+        return postservices.advancedSearch(p.getText(),p.getCategory(),p.getLocation(), p.getDate());
     }
-    @GetMapping("/searchwrapper")
-    public String searchWrapper(Model model)
+    @PostMapping("/searchwrapper")
+    public String searchWrapper( Post post, Model model)
     {
-        showsearchresult=!showsearchresult;
         List<Post>searchResult;
-        if(showSearchDiv)
-            searchResult = advancedSearch();
+        if(!post.getText().isEmpty()&&(!post.getCategory().isEmpty()||!post.getLocation().isEmpty()|| post.getDate()!=null))
+            searchResult = advancedSearch(post);
         else
-            searchResult = simpleSearch();
-        boolean searchempty= searchResult.isEmpty();
-        model.addAttribute("showsearchresult",showsearchresult);
-        model.addAttribute("searchempty", searchempty);
-        model.addAttribute("searchresult", searchResult);
+            searchResult = simpleSearch(post);
 
+        if(!searchResult.isEmpty())
+            showsearchresult=true;
+        else
+            showsearchresult=false;
+        System.out.println("Search Results: " + searchResult);
+        model.addAttribute("searchresult", searchResult);
+        model.addAttribute("post",post);
+        model.addAttribute("showsearchresult",showsearchresult);
         return "searchpost";
     }
     @GetMapping("/showsearchdiv")
